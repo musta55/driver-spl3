@@ -3,7 +3,6 @@ from sys import settrace
 import copy
 import sys
 import re
-import codecs 
 # Stores the current local variables
 current_variables = {}
 
@@ -34,19 +33,10 @@ print_details = True
 
 # Stores the name of the file
 fileName = ""
-
-
 def print_executed_code(code):
     lines = code.split('\n')
     for line in lines:
-        print('<div class="code-line">%s</div>' % line)
-
-output_file_name = "quick_sort.html"
-
-# Create a function to write HTML output to a file
-def write_output_to_file(html_output):
-    with open(output_file_name, 'w') as output_file:
-        output_file.write(html_output)
+         print('<div class="code-line">%s</div>' % line)
 
 # local trace function which returns itself
 def my_tracer(frame, event, arg=None):
@@ -95,7 +85,7 @@ def my_tracer(frame, event, arg=None):
     if event == 'call':
         # Stores the name of the previous function which called the current function.
         # If no such function exists then it stores empty string
-        prev_function = getattr(inspect.stack()[2], "function")
+        prev_function = getattr(inspect.stack()[2],"function")
 
         # Stores the string which describes the function to be executed and is shown on the accordian(HTML element) in the webpage
         call_entry = prev_function + " " + "Call" + "ed (function) " + func_name + " with arguments"
@@ -106,14 +96,13 @@ def my_tracer(frame, event, arg=None):
 
         # This generates the accordian on the webpage
         print('''
-        <button onclick="myFunction('Demo%s')" class="w3-btn w3-block w3-green w3-left-align" style = "font-size:20px">%s</button>
-        <div id="Demo%s" class="w3-container w3-hide div_func_button">
-        ''' % (tab, call_entry, tab))
+		<button onclick="myFunction('Demo%s')" class="w3-btn w3-block w3-green w3-left-align" style = "font-size:20px">%s</button>
+    	<div id="Demo%s" class="w3-container w3-hide div_func_button">
+		''' % (tab, call_entry, tab))
 
         tab += 1
 
     # event return means the function has returned
-
     if event == 'return':
 
         # Stores the string which describes what the function returned
@@ -121,14 +110,14 @@ def my_tracer(frame, event, arg=None):
 
         # Displays call_exit on the webpage
         print('''
-        </div>
-        <div class = " w3-green div_return_text" style = "font-size:20px">%s</div>
-        ''' % (call_exit))
+		</div>
+		<div class = " w3-green div_return_text" style = "font-size:20px">%s</div>
+		''' % (call_exit))
 
     # event line means the next line of code is about to be executed
     if event == 'line':
         # Extracts current line of code
-        curr_code = getattr(inspect.stack()[1], "code_context")[0]
+        curr_code = getattr(inspect.stack()[1],"code_context")[0]
 
         # Stores the local variables after the current line has been executed
         new_variables = inspect.stack()[1][0].f_locals
@@ -151,8 +140,10 @@ def my_tracer(frame, event, arg=None):
             # New variable introduced
             if var not in current_variables:
                 if print_details:
-                    print("<div class = \"div_var_intro\">%s</div>" % (var + " = " + str(new_variables[var]) + " is introduced."), "<br>")
+                    print("<div class = \"div_var_intro\">%s</div>" % (var + " = " + str(new_variables[var]) + " is introduced."),"<br>")
             # Old variable updated
+
+
             else:
                 # Generates the complete history of how a variable has changed as the program was executed using stack_history
                 if new_variables[var] != current_variables[var]:
@@ -160,21 +151,17 @@ def my_tracer(frame, event, arg=None):
                     var_history = []
                     for stack in stack_history:
                         if var in stack:
-                            if (len(var_history) == 0) or (
-                                    len(var_history) > 0 and var_history[-1] != stack[var]):
+                            if (len(var_history)==0) or (len(var_history)>0 and var_history[-1] != stack[var]):
                                 var_history.append(copy.deepcopy(stack[var]))
-                    var_history_str = [str(v) for v in var_history]
+                    var_history_str =  [str(v) for v in var_history]
                     # Displays the history of a variable in a popup in the webpage
-                    tooltip_text = "<div class=\"tooltip\">" + var + "\n<span class=\"tooltiptext\">" + " &rarr; ".join(
-                        var_history_str) + "</span>\n</div>"
-                    print("<div class = \"div_var_mod\">%s</div>" % (
-                            tooltip_text + " = " + str(current_variables[var]) + " &rarr; " + str(new_variables[var])),
-                          "<br>")
+                    tooltip_text = "<div class=\"tooltip\">"+ var +"\n<span class=\"tooltiptext\">" + " &rarr; ".join(var_history_str) + "</span>\n</div>"
+                    print("<div class = \"div_var_mod\">%s</div>" % (tooltip_text + " = " + str(current_variables[var]) + " &rarr; " + str(new_variables[var])),"<br>")
 
         print_details = True
         # Regex to identify simple assignment statements, explanation will not be generated for them
         regex_simple_assignment = r"(\s*)([a-zA-Z][a-zA-Z0-9_]*)(\s*)(=)(\s*)((\d+)|\[\])"
-        match_simple_assignment = re.search(regex_simple_assignment, curr_code)
+        match_simple_assignment = re.search(regex_simple_assignment,curr_code)
 
         # If the statement is a simple assignment then print_details is set to false.
         if match_simple_assignment != None:
@@ -185,7 +172,7 @@ def my_tracer(frame, event, arg=None):
         curr_indent = 0
         for c in curr_code:
             if c == " ":
-                curr_indent += 1
+                curr_indent+=1
             else:
                 break
 
@@ -204,13 +191,13 @@ def my_tracer(frame, event, arg=None):
         """
 
         # Ends the slideshow HTML element if a loop is exited
-        if len(whileloopID) > 0 and curr_indent < whileloopID[-1][1] + 4:
+        if len(whileloopID)>0 and curr_indent < whileloopID[-1][1]+4:
             print("</div class = \"temp\">")
-        if len(forloopID) > 0 and curr_indent < forloopID[-1][1] + 4:
+        if len(forloopID)>0 and curr_indent < forloopID[-1][1]+4:
             print("</div class = \"temp\">")
 
         # Ends a SINGLE slide of the slideshow HTML element if the while loop ends
-        if inWhileLoop and curr_indent < whileloopID[-1][1] + 4 and whileloopID[-1][:2] != [line_no, indentWhile]:
+        if inWhileLoop and curr_indent < whileloopID[-1][1]+4 and whileloopID[-1][:2]!=[line_no,indentWhile]:
             inWhileLoop = False
             print("""<a class="prev" onclick="plusSlides(-1,%s)">&#10094;</a>
             <a class="next" onclick="plusSlides(1,%s)">&#10095;</a>
@@ -218,7 +205,7 @@ def my_tracer(frame, event, arg=None):
             whileloopID.pop()
 
         # Ends a SINGLE slide of the slideshow HTML element if the for loop ends
-        if inForLoop and curr_indent < forloopID[-1][1] + 4 and forloopID[-1][:2] != [line_no, indentFor]:
+        if inForLoop and curr_indent < forloopID[-1][1]+4 and forloopID[-1][:2]!=[line_no,indentFor]:
             inForLoop = False
             print("""<a class="prev" onclick="plusSlides(-1,%s)">&#10094;</a>
             <a class="next" onclick="plusSlides(1,%s)">&#10095;</a>
@@ -232,14 +219,14 @@ def my_tracer(frame, event, arg=None):
             indentWhile = 0
             for c in curr_code:
                 if c == " ":
-                    indentWhile += 1
+                    indentWhile+=1
                 else:
                     break
             # New SlideShow if needed
-            if len(whileloopID) == 0 or whileloopID[-1][:2] != [line_no, indentWhile]:
-                whileloopID.append([line_no, indentWhile, slideShowId])
+            if len(whileloopID)==0 or whileloopID[-1][:2]!=[line_no,indentWhile]:
+                whileloopID.append([line_no,indentWhile,slideShowId])
                 print("<div id = \"ss%s\" class=\"slideshow-container\">" % (slideShowId))
-                slideShowId += 1
+                slideShowId+=1
             # New slide
             print("<div id=\"ms%s\" class=\"mySlides\">" % (whileloopID[-1][2]))
 
@@ -250,14 +237,14 @@ def my_tracer(frame, event, arg=None):
             indentFor = 0
             for c in curr_code:
                 if c == " ":
-                    indentFor += 1
+                    indentFor+=1
                 else:
                     break
             # New SlideShow if needed
-            if len(forloopID) == 0 or forloopID[-1][:2] != [line_no, indentFor]:
-                forloopID.append([line_no, indentFor, slideShowId])
+            if len(forloopID)==0 or forloopID[-1][:2]!=[line_no,indentFor]:
+                forloopID.append([line_no,indentFor,slideShowId])
                 print("<div id = \"ss%s\" class=\"slideshow-container\">" % (slideShowId))
-                slideShowId += 1
+                slideShowId+=1
             # New slide
             print("<div id=\"ms%s\" class=\"mySlides\">" % (forloopID[-1][2]))
 
@@ -271,7 +258,7 @@ def my_tracer(frame, event, arg=None):
             # Evaluates and stores a copy of condition of if statement with the variable names replaced with the corresponding value
             mod_code = copy.deepcopy(match_if.group(3))
             mod_code = mod_code[:-1]
-            sorted_list_of_variables = sorted([var for var in new_variables], key=len, reverse=True)
+            sorted_list_of_variables = sorted([var for var in new_variables], key = len, reverse = True)
             for var in sorted_list_of_variables:
                 mod_code = mod_code.replace(var, str(new_variables[var]))
             is_if = True
@@ -303,9 +290,9 @@ def my_tracer(frame, event, arg=None):
             # This loop generated the tooltip for each object and function. Ex: object1.object2.function()
             for k in range(len(match_object_function.groups())):
                 if matched_var not in current_variables or k != 0:
-                    function_name += curr_code[match_object_function.start(k + 1):match_object_function.end(k + 1)]
+                    function_name += curr_code[match_object_function.start(k+1):match_object_function.end(k+1)]
                 tooltip_text = eval(str(function_name) + ".__doc__")
-                curr_code_html += "<div class=\"tooltip\">" + curr_code[match_object_function.start(k + 1):match_object_function.end(k + 1)] + "\n<span class=\"tooltiptext\">" + tooltip_text + "</span>\n</div>"
+                curr_code_html += "<div class=\"tooltip\">"+ curr_code[match_object_function.start(k+1):match_object_function.end(k+1)] +"\n<span class=\"tooltiptext\">" + tooltip_text + "</span>\n</div>"
             curr_code_html += curr_code[match_object_function.end(len(match_object_function.groups())):]
             pass
 
@@ -314,66 +301,255 @@ def my_tracer(frame, event, arg=None):
             curr_code_html = curr_code[:match_function.start(2)]
             function_name += curr_code[match_function.start(2):match_function.end(2)]
             tooltip_text = eval(str(function_name) + ".__doc__")
-            curr_code_html += "<div class=\"tooltip\">" + curr_code[match_function.start(2):match_function.end(2)] + "\n<span class=\"tooltiptext\">" + tooltip_text + "</span>\n</div>"
+            curr_code_html += "<div class=\"tooltip\">"+ curr_code[match_function.start(2):match_function.end(2)] +"\n<span class=\"tooltiptext\">" + tooltip_text + "</span>\n</div>"
             curr_code_html += curr_code[match_function.end(2):]
-        else:
             pass
 
-        # Regex to identify import statements
-        regex_import = r"(\s*)import.*"
-        match_import = re.search(regex_import, curr_code)
+        # Prints the line number and code in the webpage
+        print("<div class = \"div_line_num\">%s</div>" % (str(line_no-510)), "<div class = \"div_code_text\">%s</div>" % (curr_code_html),"<br>")
 
-        # Generates the HTML code for the import statement with popup
-        if match_import != None:
-            curr_code_html = curr_code[:match_import.start()]
-            import_code = ""
-            for k in range(1, len(match_import.groups()) + 1):
-                import_code += curr_code[match_import.start(k):match_import.end(k)]
-            import_code = import_code.split()
-            curr_code_html += "<div class=\"tooltip\">" + import_code[0] + "\n<span class=\"tooltiptext\">" + \
-                             "<br>".join(import_code[1:]) + "</span>\n</div>"
-            curr_code_html += curr_code[match_import.end():]
-
-        # Regex to identify from import statements
-        regex_from_import = r"(\s*)from.*"
-        match_from_import = re.search(regex_from_import, curr_code)
-
-        # Generates the HTML code for the from import statement with popup
-        if match_from_import != None:
-            curr_code_html = curr_code[:match_from_import.start()]
-            from_import_code = ""
-            for k in range(1, len(match_from_import.groups()) + 1):
-                from_import_code += curr_code[match_from_import.start(k):match_from_import.end(k)]
-            from_import_code = from_import_code.split()
-            curr_code_html += "<div class=\"tooltip\">" + from_import_code[1] + "\n<span class=\"tooltiptext\">" + \
-                             "<br>".join(from_import_code[3:]) + "</span>\n</div>"
-            curr_code_html += curr_code[match_from_import.end():]
-
-        # Appends the result of the if condition to curr_code_html
+        # If the line of code is and if statement then the result of the evaluation of the condition is printed after it.
         if is_if:
-            curr_code_html += "<div class=\"tooltip\">" + if_result + "\n<span class=\"tooltiptext\">" + "Condition in if statement" + "</span>\n</div>"
+            print("<div class = \"div_var_intro\">%s</div><br>" % (if_result))
 
-        # Appends the explanation and variables of the current line of code to the HTML code generated
-        curr_code_html += "<div class=\"tooltip\">" + "Explanation" + "\n<span class=\"tooltiptext\">" + \
-                         curr_code.replace("\n", "").replace("\t", "") + "<br>" + "<br>".join(
-            [var + " = " + str(new_variables[var]) for var in new_variables]) + "</span>\n</div>"
-
-        # Print the line of code with popups on the webpage
-        print("<div class = \"div_code\">%s</div><br>" % (curr_code_html))
-
-        # Replaces current_variables with the new_variables so that in the next iteration of my_tracer, the variables before
-        # the current line of code can be compared with the new_variables after the current line of code
+        # Current variables are replaced by the new variables
         current_variables = copy.deepcopy(new_variables)
 
     return my_tracer
 
 
-if __name__ == "__main__":
+def htmlInit():
+    f = open("cospex.html", 'w')
 
-    # Parse command-line arguments to get the filename to execute
-    if len(sys.argv) != 2:
-        print("Usage: python my_tracer.py quick_sort.py")
-        sys.exit(1)
+    # std output is set to the webpage so the output of the program can be displayed
+    sys.stdout = f
 
-    # Get the filename from command-line arguments
-    filename = sys.argv[1]
+    # Initializes the webpage along with the CSS
+    # NOTE: <__f__n__> is replaced with the name of the file by my-second-page.js
+    print('''
+		<!DOCTYPE html>
+		<html>
+    <head>
+    		<title>COSPEX</title>
+    		<meta name="viewport" content="width=device-width, initial-scale=1">
+    		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <script src="prism/w3code.js"></script>
+    </head>
+        <style>
+        .code-line {
+        margin-left: 57px;
+        color:#007BA7;
+        font-family: monospace;
+        font-size: 14px;
+        margin: 2px 0;
+        }
+        body {
+            margin-left: 50px;
+            background: rgb(245, 255, 245);
+        }
+        .div_var_intro {
+            display:inline-block;
+            margin-left: 57px;
+            line-height: 2;
+        }
+        .div_line_num {
+            display:inline-block;
+            width:50px;
+            color:teal;
+            line-height: 3;
+        }
+        .div_code_text {
+            display:inline-block;
+            color:#007BA7;
+            font-size:18px;
+            font-style:monolisa;
+            line-height: 1.5;
+        }
+        .div_var_mod {
+            display:inline-block;
+            margin-left: 57px;
+            line-height: 2;
+        }
+        .div_func_button {
+            margin-left:10px;
+            border-left-style:solid;
+            border-left-width:10px;
+            border-left-color: rgba(0, 128, 0, 0.3);
+        }
+        .div_return_text {
+            border-top-style: solid;
+            border-width: 2px;
+            border-color: rgb(245, 255, 245);
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+        .slideshow-container {
+            position: relative;
+            background: rgba(0, 128, 0, 0.1);;
+            }
+
+            /* Slides */
+            .mySlides {
+            display: none;
+            margin:5px;
+            padding: 30px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            }
+
+            /* Next & previous buttons */
+            .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            margin-top: -20px;
+            padding: 5px;
+            color: rgba(0, 128, 0, 0.8);
+            font-weight: bold;
+            font-size: 20px;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            }
+
+            /* Position the "next button" to the right */
+            .next {
+            position: absolute;
+            right: 0;
+            border-radius: 3px 0 0 3px;
+            }
+
+            /* On hover, add a black background color with a little bit see-through */
+            .prev:hover, .next:hover {
+            color: white;
+            }
+
+            /* The dot/bullet/indicator container */
+            .dot-container {
+            text-align: center;
+            padding: 20px;
+            background: #ddd;
+            }
+
+            /* The dots/bullets/indicators */
+            .dot {
+            cursor: pointer;
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+            }
+
+            /* Add a background color to the active dot/circle */
+            .active, .dot:hover {
+            background-color: #717171;
+            }
+
+            /* Add an italic font style to all quotes */
+            q {font-style: italic;}
+
+            /* Add a blue color to the author */
+            .author {color: cornflowerblue;}
+            .tooltip {
+            color: blue;
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+          }
+
+          /* Tooltip text */
+          .tooltip .tooltiptext {
+          bottom: 100%;
+          left: 50%;
+          margin-left: -125px;
+          visibility: hidden;
+          width: 250px;
+          background-color: black;
+          color: #fff;
+          text-align: center;
+          padding: 5px 0;
+          border-radius: 6px;
+
+            /* Position the tooltip text - see examples below! */
+            position: absolute;
+            z-index: 1;
+          }
+
+          /* Show the tooltip text when you mouse over the tooltip container */
+          .tooltip:hover .tooltiptext {
+            visibility: visible;
+          }
+          .tooltip .tooltiptext::after {
+          content: " ";
+          position: absolute;
+          top: 100%; /* At the bottom of the tooltip */
+          left: 50%;
+          margin-left: -5px;
+          border-width: 5px;
+          border-style: solid;
+          border-color: black transparent transparent transparent;
+        }
+        </style>
+		<body>
+		<div class="w3-container">
+
+		<h2>Filename : <__f__n__></h2>
+    <hr>
+		<p>Open and collapse the accordian to see the summary</p>
+	''')
+
+
+htmlInit()
+
+# Tracer function is set to the function my_tracer
+settrace(my_tracer)
+
+# <__b_s__> is replaced with the code selected by the user by my-second-page.js
+# <__b__s__>
+
+# Tracer function is set to None
+settrace(None)
+
+# It contains the script for the accordian and the slideshows
+print('''<script>
+var ss_count = %s;
+function myFunction(id) {
+  var x = document.getElementById(id);
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else {
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+var slideIndex = new Array(ss_count).fill(1);
+var ind = 1;
+for(ind = 0; ind < ss_count; ind++){
+    showSlides(slideIndex[ind],ind);
+}
+
+
+function plusSlides(n,i) {
+  showSlides(slideIndex[i] += n,i);
+}
+
+function currentSlide(n,i) {
+  showSlides(slideIndex[i] = n,i);
+}
+
+function showSlides(n,i) {
+  var k;
+  var slides = document.getElementById("ss"+i).querySelectorAll('#ms'+i);
+  console.log(slides)
+  if (n > slides.length) {slideIndex[i] = 1}
+    if (n < 1) {slideIndex[i] = slides.length}
+    for (k = 0; k < slides.length; k++) {
+      slides[k].style.display = "none";
+    }
+  slides[slideIndex[i]-1].style.display = "block";
+}
+</script>
+</body>
+</html>''' % (slideShowId))
