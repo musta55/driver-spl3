@@ -508,7 +508,7 @@ htmlInit()
 settrace(my_tracer)
 
 # <__b_s__> is replaced with the code selected by the user by my-second-page.js
-# <__b__s__>
+<__b__s__>
 
 # Tracer function is set to None
 settrace(None)
