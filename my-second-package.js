@@ -61,5 +61,5 @@ function openWebpage(webpagePath) {
 }
 
 // Usage: Call the analyzeFile function with the path to the file you want to examine
-const filePathToExamine = 'rod_cutting.py';
+const filePathToExamine = 'quick_sort.py';
 analyzeFile(filePathToExamine);
