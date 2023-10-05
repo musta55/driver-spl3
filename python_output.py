@@ -79,7 +79,6 @@ def my_tracer(frame, event, arg=None):
     Event is a string: 'call', 'line', 'return', 'exception' or 'opcode'.
     Arg depends on the event type.
     """
-    print("event is")
     print(event)
 
 
@@ -114,6 +113,7 @@ def my_tracer(frame, event, arg=None):
         # Handle opcode event
         opcode = frame.f_code.co_code[frame.f_lasti]
         print(f'Executing opcode: {opcode}')
+
     # event return means the function has returned
     if event == 'return':
 
@@ -337,7 +337,7 @@ def htmlInit():
     sys.stdout = f
 
     # Initializes the webpage along with the CSS
-    # NOTE: lcs.py is replaced with the name of the file by my-second-page.js
+    # NOTE: call.py is replaced with the name of the file by my-second-page.js
     print('''
 		<!DOCTYPE html>
 		<html>
@@ -508,7 +508,7 @@ def htmlInit():
 		<body>
 		<div class="w3-container">
 
-		<h2>Filename : lcs.py</h2>
+		<h2>Filename : call.py</h2>
     <hr>
 		<p>Open and collapse the accordian to see the summary</p>
 	''')
@@ -520,41 +520,22 @@ htmlInit()
 settrace(my_tracer)
 
 # <__b_s__> is replaced with the code selected by the user by my-second-page.js
-def longest_common_subsequence(X, Y):
-    m, n = len(X), len(Y)
-    
-    # Create a table to store the length of LCS for subproblems
-    dp = [[0] * (n + 1) for _ in range(m + 1)]
-    
-    # Fill in the DP table using a bottom-up approach
-    for i in range(1, m + 1):
-        for j in range(1, n + 1):
-            if X[i - 1] == Y[j - 1]:
-                dp[i][j] = dp[i - 1][j - 1] + 1
-            else:
-                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
-    
-    # Reconstruct the LCS from the DP table
-    lcs = []
-    i, j = m, n
-    while i > 0 and j > 0:
-        if X[i - 1] == Y[j - 1]:
-            lcs.append(X[i - 1])
-            i -= 1
-            j -= 1
-        elif dp[i - 1][j] > dp[i][j - 1]:
-            i -= 1
-        else:
-            j -= 1
-    
-    lcs.reverse()
-    return "".join(lcs)
+# Function to calculate the square of a number
+def calculate_square(x):
+    return x ** 2
 
-# Test the longest_common_subsequence function
-X = "AGGTAB"
-Y = "GXTXAYB"
-result = longest_common_subsequence(X, Y)
-print(f"The Longest Common Subsequence is '{result}'.")
+def main():
+    # Test input
+    number = 5
+
+    # Call the calculate_square function
+    result = calculate_square(number)
+
+    # Display the result
+    print(f"The square of {number} is {result}.")
+
+if __name__ == "__main__":
+    main()
 
 
 # Tracer function is set to None
