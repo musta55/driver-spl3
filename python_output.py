@@ -62,7 +62,7 @@ def my_tracer(frame, event, arg=None):
     func_name = code.co_name
     # extracts the line number
     line_no = frame.f_lineno
-    print(code)
+    # print(code)
     tracer_function_code = inspect.getsource(code)
     # Print the entire code executed by the tracer function only once
     if not hasattr(my_tracer, '_code_printed'):
@@ -79,6 +79,9 @@ def my_tracer(frame, event, arg=None):
     Event is a string: 'call', 'line', 'return', 'exception' or 'opcode'.
     Arg depends on the event type.
     """
+    print("event is")
+    print(event)
+
 
     # event call means a function has been called
 
@@ -101,7 +104,16 @@ def my_tracer(frame, event, arg=None):
 		''' % (tab, call_entry, tab))
 
         tab += 1
-
+    
+    if event == 'exception':
+        # Handle exception event
+        exc_type, exc_value, exc_traceback = arg
+        print(f'Exception: {exc_type.__name__} - {exc_value}')
+    
+    if event == 'opcode':
+        # Handle opcode event
+        opcode = frame.f_code.co_code[frame.f_lasti]
+        print(f'Executing opcode: {opcode}')
     # event return means the function has returned
     if event == 'return':
 

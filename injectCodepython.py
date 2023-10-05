@@ -79,6 +79,9 @@ def my_tracer(frame, event, arg=None):
     Event is a string: 'call', 'line', 'return', 'exception' or 'opcode'.
     Arg depends on the event type.
     """
+    print("event is")
+    print(event)
+
 
     # event call means a function has been called
 
@@ -101,7 +104,16 @@ def my_tracer(frame, event, arg=None):
 		''' % (tab, call_entry, tab))
 
         tab += 1
-
+    
+    if event == 'exception':
+        # Handle exception event
+        exc_type, exc_value, exc_traceback = arg
+        print(f'Exception: {exc_type.__name__} - {exc_value}')
+    
+    if event == 'opcode':
+        # Handle opcode event
+        opcode = frame.f_code.co_code[frame.f_lasti]
+        print(f'Executing opcode: {opcode}')
     # event return means the function has returned
     if event == 'return':
 
