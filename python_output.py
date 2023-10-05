@@ -136,7 +136,8 @@ def my_tracer(frame, event, arg=None):
 
         # stack_history is updated to include new_variables
         stack_history.append(copy.deepcopy(new_variables))
-
+        print("Stack history is:")
+        print(stack_history)
         # Regular expressions
         regexWhile = r"(\s*)while.*"
         matchWhile = re.search(regexWhile, curr_code)
@@ -337,7 +338,7 @@ def htmlInit():
     sys.stdout = f
 
     # Initializes the webpage along with the CSS
-    # NOTE: call.py is replaced with the name of the file by my-second-page.js
+    # NOTE: quick_sort.py is replaced with the name of the file by my-second-page.js
     print('''
 		<!DOCTYPE html>
 		<html>
@@ -508,7 +509,7 @@ def htmlInit():
 		<body>
 		<div class="w3-container">
 
-		<h2>Filename : call.py</h2>
+		<h2>Filename : quick_sort.py</h2>
     <hr>
 		<p>Open and collapse the accordian to see the summary</p>
 	''')
@@ -520,22 +521,35 @@ htmlInit()
 settrace(my_tracer)
 
 # <__b_s__> is replaced with the code selected by the user by my-second-page.js
-# Function to calculate the square of a number
-def calculate_square(x):
-    return x ** 2
+import inspect
+def quick_sort(collection: list) -> list:
+    """A pure Python implementation of quick sort algorithm
+    :param collection: a mutable collection of comparable items
+    :return: the same collection ordered by ascending
+    Examples:
+    >>> quick_sort([0, 5, 3, 2, 2])
+    [0, 2, 2, 3, 5]
+    >>> quick_sort([])
+    []
+    >>> quick_sort([-2, 5, 0, -45])
+    [-45, -2, 0, 5]
+    """
+    if len(collection) < 2:
+        return collection
+    pivot = collection.pop()  # Use the last element as the first pivot
+    greater = []  # All elements greater than pivot
+    lesser = []  # All elements less than or equal to pivot
+    for element in collection:
+        (greater if element > pivot else lesser).append(element)
+    return quick_sort(lesser) + [pivot] + quick_sort(greater)
 
-def main():
-    # Test input
-    number = 5
 
-    # Call the calculate_square function
-    result = calculate_square(number)
 
-    # Display the result
-    print(f"The square of {number} is {result}.")
+user_input = "32,13,56,24,87,5,12,5".strip()
+unsorted = [int(item) for item in user_input.split(",")]
+print(quick_sort(unsorted))
 
-if __name__ == "__main__":
-    main()
+# source: https://github.com/TheAlgorithms/Python
 
 
 # Tracer function is set to None
