@@ -331,7 +331,7 @@ def my_tracer(frame, event, arg=None):
 
 
 def htmlInit():
-    f = open("cospex.html", 'w')
+    f = open("pytracex.html", 'w')
 
     # std output is set to the webpage so the output of the program can be displayed
     sys.stdout = f
