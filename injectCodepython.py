@@ -313,7 +313,12 @@ def my_tracer(frame, event, arg=None):
             curr_code_html = curr_code[:match_function.start(2)]
             function_name += curr_code[match_function.start(2):match_function.end(2)]
             tooltip_text = eval(str(function_name) + ".__doc__")
-            curr_code_html += "<div class=\"tooltip\">"+ curr_code[match_function.start(2):match_function.end(2)] +"\n<span class=\"tooltiptext\">" + tooltip_text + "</span>\n</div>"
+            if tooltip_text is not None:
+                curr_code_html += "<div class=\"tooltip\">"+ curr_code[match_function.start(2):match_function.end(2)] +"\n<span class=\"tooltiptext\">" + tooltip_text + "</span>\n</div>"
+            else:
+                pass
+
+            # curr_code_html += "<div class=\"tooltip\">"+ curr_code[match_function.start(2):match_function.end(2)] +"\n<span class=\"tooltiptext\">" + tooltip_text + "</span>\n</div>"
             curr_code_html += curr_code[match_function.end(2):]
             pass
 

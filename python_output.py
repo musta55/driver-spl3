@@ -313,7 +313,12 @@ def my_tracer(frame, event, arg=None):
             curr_code_html = curr_code[:match_function.start(2)]
             function_name += curr_code[match_function.start(2):match_function.end(2)]
             tooltip_text = eval(str(function_name) + ".__doc__")
-            curr_code_html += "<div class=\"tooltip\">"+ curr_code[match_function.start(2):match_function.end(2)] +"\n<span class=\"tooltiptext\">" + tooltip_text + "</span>\n</div>"
+            if tooltip_text is not None:
+                curr_code_html += "<div class=\"tooltip\">"+ curr_code[match_function.start(2):match_function.end(2)] +"\n<span class=\"tooltiptext\">" + tooltip_text + "</span>\n</div>"
+            else:
+                pass
+
+            # curr_code_html += "<div class=\"tooltip\">"+ curr_code[match_function.start(2):match_function.end(2)] +"\n<span class=\"tooltiptext\">" + tooltip_text + "</span>\n</div>"
             curr_code_html += curr_code[match_function.end(2):]
             pass
 
@@ -331,18 +336,18 @@ def my_tracer(frame, event, arg=None):
 
 
 def htmlInit():
-    f = open("cospex.html", 'w')
+    f = open("pytracex.html", 'w')
 
     # std output is set to the webpage so the output of the program can be displayed
     sys.stdout = f
 
     # Initializes the webpage along with the CSS
-    # NOTE: quick_sort.py is replaced with the name of the file by my-second-page.js
+    # NOTE: inheritence.py is replaced with the name of the file by my-second-page.js
     print('''
 		<!DOCTYPE html>
 		<html>
     <head>
-    		<title>COSPEX</title>
+    		<title>PyTraceX</title>
     		<meta name="viewport" content="width=device-width, initial-scale=1">
     		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <script src="prism/w3code.js"></script>
@@ -508,7 +513,7 @@ def htmlInit():
 		<body>
 		<div class="w3-container">
 
-		<h2>Filename : quick_sort.py</h2>
+		<h2>Filename : inheritence.py</h2>
     <hr>
 		<p>Open and collapse the accordian to see the summary</p>
 	''')
@@ -520,35 +525,25 @@ htmlInit()
 settrace(my_tracer)
 
 # <__b_s__> is replaced with the code selected by the user by my-second-page.js
-import inspect
-def quick_sort(collection: list) -> list:
-    """A pure Python implementation of quick sort algorithm
-    :param collection: a mutable collection of comparable items
-    :return: the same collection ordered by ascending
-    Examples:
-    >>> quick_sort([0, 5, 3, 2, 2])
-    [0, 2, 2, 3, 5]
-    >>> quick_sort([])
-    []
-    >>> quick_sort([-2, 5, 0, -45])
-    [-45, -2, 0, 5]
-    """
-    if len(collection) < 2:
-        return collection
-    pivot = collection.pop()  # Use the last element as the first pivot
-    greater = []  # All elements greater than pivot
-    lesser = []  # All elements less than or equal to pivot
-    for element in collection:
-        (greater if element > pivot else lesser).append(element)
-    return quick_sort(lesser) + [pivot] + quick_sort(greater)
 
 
 
-user_input = "32,13,56,24,87,5,12,5".strip()
-unsorted = [int(item) for item in user_input.split(",")]
-print(quick_sort(unsorted))
+def calculate_square(self, x):
+        self.result = x ** 2
 
-# source: https://github.com/TheAlgorithms/Python
+def main():
+
+    # Test input
+    number = 5
+
+    # Call the calculate_square method
+    calculate_square(number)
+
+    # Display the result
+    print(f"The square of {number} is {calc.result}.")
+
+if __name__ == "__main__":
+    main()
 
 
 # Tracer function is set to None
