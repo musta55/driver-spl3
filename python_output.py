@@ -136,8 +136,7 @@ def my_tracer(frame, event, arg=None):
 
         # stack_history is updated to include new_variables
         stack_history.append(copy.deepcopy(new_variables))
-        print("Stack history is:")
-        print(stack_history)
+
         # Regular expressions
         regexWhile = r"(\s*)while.*"
         matchWhile = re.search(regexWhile, curr_code)
