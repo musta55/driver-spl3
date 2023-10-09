@@ -38,7 +38,7 @@ fileName = ""
 def print_executed_code(code):
     lines = code.split('\n')
     for line in lines:
-         print('<div class="code-line">%s</div>' % line)
+         print('<pre><div class="code-line">%s</div></pre>' % line)
 
 # local trace function which returns itself
 def my_tracer(frame, event, arg=None):
@@ -69,16 +69,14 @@ def my_tracer(frame, event, arg=None):
     # Print the entire code executed by the tracer function only once
     if not hasattr(my_tracer, '_code_printed'):
         print('The source code is:\n')
-        print('The Filename code is:\n')
-        print("Fibonacci.py")
-
-        cfg = CFGBuilder().build_from_file("dot", "Fibonacci.py")
-        cfg.build_visual('dot', 'png')
-        print('''
-		<img src="dot.png" alt="Image" style="vertical-align:middle; width:1000px; height:500px;">
-		''')
-
         print_executed_code(tracer_function_code)
+
+        cfg = CFGBuilder().build_from_file("dot", "lcs.py")
+        cfg.build_visual('dot', 'png')
+        
+        print('''
+		<img src="dot.png" alt="Image" style="vertical-align:middle; width:1600px; height:800px;">
+		''')
         setattr(my_tracer, '_code_printed', True)
     # Local trace function is not executed for the following functions
     if func_name == 'encode' or func_name[0] == "<":
@@ -90,7 +88,6 @@ def my_tracer(frame, event, arg=None):
     Event is a string: 'call', 'line', 'return', 'exception' or 'opcode'.
     Arg depends on the event type.
     """
-    print(event)
 
 
     # event call means a function has been called
@@ -353,7 +350,7 @@ def htmlInit():
     sys.stdout = f
 
     # Initializes the webpage along with the CSS
-    # NOTE: Fibonacci.py is replaced with the name of the file by my-second-page.js
+    # NOTE: lcs.py is replaced with the name of the file by my-second-page.js
     print('''
 		<!DOCTYPE html>
 		<html>
@@ -524,7 +521,7 @@ def htmlInit():
 		<body>
 		<div class="w3-container">
 
-		<h2>Filename : Fibonacci.py</h2>
+		<h2>Filename : lcs.py</h2>
     <hr>
 		<p>Open and collapse the accordian to see the summary</p>
 	''')
@@ -536,16 +533,41 @@ htmlInit()
 settrace(my_tracer)
 
 # <__b_s__> is replaced with the code selected by the user by my-second-page.js
-def fibonacci(n):
-    f = [0, 1]
-    for i in range(2, n+1):
-        f.append(f[i-1] + f[i-2])
-    return f[n]
-# Calling the fibonacci function with n = 10
-result = fibonacci(10)
+def longest_common_subsequence(X, Y):
+    m, n = len(X), len(Y)
+    
+    # Create a table to store the length of LCS for subproblems
+    dp = [[0] * (n + 1) for _ in range(m + 1)]
+    
+    # Fill in the DP table using a bottom-up approach
+    for i in range(1, m + 1):
+        for j in range(1, n + 1):
+            if X[i - 1] == Y[j - 1]:
+                dp[i][j] = dp[i - 1][j - 1] + 1
+            else:
+                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
+    
+    # Reconstruct the LCS from the DP table
+    lcs = []
+    i, j = m, n
+    while i > 0 and j > 0:
+        if X[i - 1] == Y[j - 1]:
+            lcs.append(X[i - 1])
+            i -= 1
+            j -= 1
+        elif dp[i - 1][j] > dp[i][j - 1]:
+            i -= 1
+        else:
+            j -= 1
+    
+    lcs.reverse()
+    return "".join(lcs)
 
-# Printing the result
-print(result)
+# Test the longest_common_subsequence function
+X = "AGGTAB"
+Y = "GXTXAYB"
+result = longest_common_subsequence(X, Y)
+print(f"The Longest Common Subsequence is '{result}'.")
 
 
 # Tracer function is set to None

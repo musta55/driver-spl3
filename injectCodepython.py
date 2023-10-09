@@ -38,7 +38,7 @@ fileName = ""
 def print_executed_code(code):
     lines = code.split('\n')
     for line in lines:
-         print('<div class="code-line">%s</div>' % line)
+         print('<pre><div class="code-line">%s</div></pre>' % line)
 
 # local trace function which returns itself
 def my_tracer(frame, event, arg=None):
@@ -69,16 +69,14 @@ def my_tracer(frame, event, arg=None):
     # Print the entire code executed by the tracer function only once
     if not hasattr(my_tracer, '_code_printed'):
         print('The source code is:\n')
-        print('The Filename code is:\n')
-        print("<__f__n__>")
+        print_executed_code(tracer_function_code)
 
         cfg = CFGBuilder().build_from_file("dot", "<__f__n__>")
         cfg.build_visual('dot', 'png')
+        
         print('''
-		<img src="dot.png" alt="Image" style="vertical-align:middle; width:1000px; height:500px;">
+		<img src="dot.png" alt="Image" style="vertical-align:middle; width:1600px; height:800px;">
 		''')
-
-        print_executed_code(tracer_function_code)
         setattr(my_tracer, '_code_printed', True)
     # Local trace function is not executed for the following functions
     if func_name == 'encode' or func_name[0] == "<":
@@ -90,7 +88,6 @@ def my_tracer(frame, event, arg=None):
     Event is a string: 'call', 'line', 'return', 'exception' or 'opcode'.
     Arg depends on the event type.
     """
-    print(event)
 
 
     # event call means a function has been called
