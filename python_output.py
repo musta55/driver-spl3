@@ -72,20 +72,11 @@ def my_tracer(frame, event, arg=None):
         print('The Filename code is:\n')
         print("Fibonacci.py")
 
-        cfg = CFGBuilder().build_from_file("Fibonacci.py"+"out", "Fibonacci.py")
-        cfg.build_visual("Fibonacci.py", 'png')
+        cfg = CFGBuilder().build_from_file("dot", "Fibonacci.py")
+        cfg.build_visual('dot', 'png')
         print('''
-		<img src="Fibonacci.py.png" alt="Image" style="vertical-align:middle; width:1000px; height:500px;">
+		<img src="dot.png" alt="Image" style="vertical-align:middle; width:1000px; height:500px;">
 		''')
-
-        def dot_to_svg(dot_file, svg_file):
-            graph = pydot.graph_from_dot_file(dot_file)
-            graph[0].write_png(svg_file)
-
-        dot_file = "Fibonacci.py"+"out"
-        svg_file = 'Fibonacci.py'+ ".svg"
-
-        dot_to_svg(dot_file, svg_file)
 
         print_executed_code(tracer_function_code)
         setattr(my_tracer, '_code_printed', True)
@@ -550,10 +541,12 @@ def fibonacci(n):
     for i in range(2, n+1):
         f.append(f[i-1] + f[i-2])
     return f[n]
+# Calling the fibonacci function with n = 10
 result = fibonacci(10)
 
 # Printing the result
 print(result)
+
 
 # Tracer function is set to None
 settrace(None)

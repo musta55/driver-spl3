@@ -72,20 +72,11 @@ def my_tracer(frame, event, arg=None):
         print('The Filename code is:\n')
         print("<__f__n__>")
 
-        cfg = CFGBuilder().build_from_file("<__f__n__>"+"out", "<__f__n__>")
-        cfg.build_visual("<__f__n__>", 'png')
+        cfg = CFGBuilder().build_from_file("dot", "<__f__n__>")
+        cfg.build_visual('dot', 'png')
         print('''
-		<img src="<__f__n__>.png" alt="Image" style="vertical-align:middle; width:1000px; height:500px;">
+		<img src="dot.png" alt="Image" style="vertical-align:middle; width:1000px; height:500px;">
 		''')
-
-        def dot_to_svg(dot_file, svg_file):
-            graph = pydot.graph_from_dot_file(dot_file)
-            graph[0].write_png(svg_file)
-
-        dot_file = "<__f__n__>"+"out"
-        svg_file = '<__f__n__>'+ ".svg"
-
-        dot_to_svg(dot_file, svg_file)
 
         print_executed_code(tracer_function_code)
         setattr(my_tracer, '_code_printed', True)
