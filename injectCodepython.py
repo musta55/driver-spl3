@@ -3,6 +3,8 @@ from sys import settrace
 import copy
 import sys
 import re
+from py2cfg import CFGBuilder
+import pydot
 # Stores the current local variables
 current_variables = {}
 
@@ -67,6 +69,24 @@ def my_tracer(frame, event, arg=None):
     # Print the entire code executed by the tracer function only once
     if not hasattr(my_tracer, '_code_printed'):
         print('The source code is:\n')
+        print('The Filename code is:\n')
+        print("<__f__n__>")
+
+        cfg = CFGBuilder().build_from_file("<__f__n__>"+"out", "<__f__n__>")
+        cfg.build_visual("<__f__n__>", 'png')
+        print('''
+		<img src="<__f__n__>.png" alt="Image" style="vertical-align:middle; width:1000px; height:500px;">
+		''')
+
+        def dot_to_svg(dot_file, svg_file):
+            graph = pydot.graph_from_dot_file(dot_file)
+            graph[0].write_png(svg_file)
+
+        dot_file = "<__f__n__>"+"out"
+        svg_file = '<__f__n__>'+ ".svg"
+
+        dot_to_svg(dot_file, svg_file)
+
         print_executed_code(tracer_function_code)
         setattr(my_tracer, '_code_printed', True)
     # Local trace function is not executed for the following functions

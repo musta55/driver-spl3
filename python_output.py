@@ -3,6 +3,8 @@ from sys import settrace
 import copy
 import sys
 import re
+from py2cfg import CFGBuilder
+import pydot
 # Stores the current local variables
 current_variables = {}
 
@@ -67,6 +69,24 @@ def my_tracer(frame, event, arg=None):
     # Print the entire code executed by the tracer function only once
     if not hasattr(my_tracer, '_code_printed'):
         print('The source code is:\n')
+        print('The Filename code is:\n')
+        print("Fibonacci.py")
+
+        cfg = CFGBuilder().build_from_file("Fibonacci.py"+"out", "Fibonacci.py")
+        cfg.build_visual("Fibonacci.py", 'png')
+        print('''
+		<img src="Fibonacci.py.png" alt="Image" style="vertical-align:middle; width:1000px; height:500px;">
+		''')
+
+        def dot_to_svg(dot_file, svg_file):
+            graph = pydot.graph_from_dot_file(dot_file)
+            graph[0].write_png(svg_file)
+
+        dot_file = "Fibonacci.py"+"out"
+        svg_file = 'Fibonacci.py'+ ".svg"
+
+        dot_to_svg(dot_file, svg_file)
+
         print_executed_code(tracer_function_code)
         setattr(my_tracer, '_code_printed', True)
     # Local trace function is not executed for the following functions
@@ -530,10 +550,10 @@ def fibonacci(n):
     for i in range(2, n+1):
         f.append(f[i-1] + f[i-2])
     return f[n]
+result = fibonacci(10)
 
-res = fibonacci(9)
-print(res)
-
+# Printing the result
+print(result)
 
 # Tracer function is set to None
 settrace(None)

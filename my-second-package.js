@@ -35,7 +35,7 @@ function analyzeFile(filePath) {
     ps.invoke()
         .then(output => {
             // Open the generated HTML file in a web browser
-            const webpagePath = path.join(__dirname, 'cospex.html');
+            const webpagePath = path.join(__dirname, 'pytracex.html');
             openWebpage(webpagePath);
         })
         .catch(err => {
