@@ -342,7 +342,7 @@ def htmlInit():
     sys.stdout = f
 
     # Initializes the webpage along with the CSS
-    # NOTE: inheritence.py is replaced with the name of the file by my-second-page.js
+    # NOTE: Fibonacci.py is replaced with the name of the file by my-second-page.js
     print('''
 		<!DOCTYPE html>
 		<html>
@@ -513,7 +513,7 @@ def htmlInit():
 		<body>
 		<div class="w3-container">
 
-		<h2>Filename : inheritence.py</h2>
+		<h2>Filename : Fibonacci.py</h2>
     <hr>
 		<p>Open and collapse the accordian to see the summary</p>
 	''')
@@ -525,25 +525,14 @@ htmlInit()
 settrace(my_tracer)
 
 # <__b_s__> is replaced with the code selected by the user by my-second-page.js
+def fibonacci(n):
+    f = [0, 1]
+    for i in range(2, n+1):
+        f.append(f[i-1] + f[i-2])
+    return f[n]
 
-
-
-def calculate_square(self, x):
-        self.result = x ** 2
-
-def main():
-
-    # Test input
-    number = 5
-
-    # Call the calculate_square method
-    calculate_square(number)
-
-    # Display the result
-    print(f"The square of {number} is {calc.result}.")
-
-if __name__ == "__main__":
-    main()
+res = fibonacci(9)
+print(res)
 
 
 # Tracer function is set to None
