@@ -72,10 +72,10 @@ def my_tracer(frame, event, arg=None):
         print_executed_code(tracer_function_code)
 
         cfg = CFGBuilder().build_from_file("dot", "<__f__n__>")
-        cfg.build_visual('dot', 'png')
+        cfg.build_visual('pytracex', 'png')
         
         print('''
-		<img src="dot.png" alt="Image" style="vertical-align:middle; width:1600px; height:800px;">
+		<img src="dot.png" alt="Image" style="vertical-align:middle; width:90%; height:480px;">
 		''')
         setattr(my_tracer, '_code_printed', True)
     # Local trace function is not executed for the following functions
@@ -523,7 +523,6 @@ def htmlInit():
 
 		<h2>Filename : <__f__n__></h2>
     <hr>
-		<p>Open and collapse the accordian to see the summary</p>
 	''')
 
 

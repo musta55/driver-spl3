@@ -71,11 +71,11 @@ def my_tracer(frame, event, arg=None):
         print('The source code is:\n')
         print_executed_code(tracer_function_code)
 
-        cfg = CFGBuilder().build_from_file("dot", "call.py")
-        cfg.build_visual('dot', 'png')
+        cfg = CFGBuilder().build_from_file("dot", "Fibonacci.py")
+        cfg.build_visual('pytracex', 'png')
         
         print('''
-		<img src="dot.png" alt="Image" style="vertical-align:middle; width:1600px; height:800px;">
+		<img src="dot.png" alt="Image" style="vertical-align:middle; width:90%; height:480px;">
 		''')
         setattr(my_tracer, '_code_printed', True)
     # Local trace function is not executed for the following functions
@@ -350,7 +350,7 @@ def htmlInit():
     sys.stdout = f
 
     # Initializes the webpage along with the CSS
-    # NOTE: call.py is replaced with the name of the file by my-second-page.js
+    # NOTE: Fibonacci.py is replaced with the name of the file by my-second-page.js
     print('''
 		<!DOCTYPE html>
 		<html>
@@ -521,9 +521,8 @@ def htmlInit():
 		<body>
 		<div class="w3-container">
 
-		<h2>Filename : call.py</h2>
+		<h2>Filename : Fibonacci.py</h2>
     <hr>
-		<p>Open and collapse the accordian to see the summary</p>
 	''')
 
 
@@ -533,22 +532,16 @@ htmlInit()
 settrace(my_tracer)
 
 # <__b_s__> is replaced with the code selected by the user by my-second-page.js
-# Function to calculate the square of a number
-def calculate_square(x):
-    return x ** 2
+def fibonacci(n):
+    f = [0, 1]
+    for i in range(2, n+1):
+        f.append(f[i-1] + f[i-2])
+    return f[n]
+# Calling the fibonacci function with n = 10
+result = fibonacci(10)
 
-def main():
-    # Test input
-    number = 5
-
-    # Call the calculate_square function
-    result = calculate_square(number)
-
-    # Display the result
-    print(f"The square of {number} is {result}.")
-
-if __name__ == "__main__":
-    main()
+# Printing the result
+print(result)
 
 
 # Tracer function is set to None
