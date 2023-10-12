@@ -61,5 +61,5 @@ function openWebpage(webpagePath) {
 }
 
 // Usage: Call the analyzeFile function with the path to the file you want to examine
-const filePathToExamine = 'task.py';
+const filePathToExamine = 'sampleCode/Fibonacci.py';
 analyzeFile(filePathToExamine);
