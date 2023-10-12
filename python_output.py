@@ -71,11 +71,11 @@ def my_tracer(frame, event, arg=None):
         print('The source code is:\n')
         print_executed_code(tracer_function_code)
 
-        cfg = CFGBuilder().build_from_file("dot", "Fibonacci.py")
-        cfg.build_visual('pytracex', 'png')
+        cfg = CFGBuilder().build_from_file("dot", "task.py")
+        cfg.build_visual('dot', 'png')
         
         print('''
-		<img src="dot.png" alt="Image" style="vertical-align:middle; width:90%; height:480px;">
+		<img src="dot.png" alt="Image" style="vertical-align:middle; width:1600px; height:800px;">
 		''')
         setattr(my_tracer, '_code_printed', True)
     # Local trace function is not executed for the following functions
@@ -350,7 +350,7 @@ def htmlInit():
     sys.stdout = f
 
     # Initializes the webpage along with the CSS
-    # NOTE: Fibonacci.py is replaced with the name of the file by my-second-page.js
+    # NOTE: task.py is replaced with the name of the file by my-second-page.js
     print('''
 		<!DOCTYPE html>
 		<html>
@@ -521,8 +521,9 @@ def htmlInit():
 		<body>
 		<div class="w3-container">
 
-		<h2>Filename : Fibonacci.py</h2>
+		<h2>Filename : task.py</h2>
     <hr>
+		<p>Open and collapse the accordian to see the summary</p>
 	''')
 
 
@@ -532,16 +533,50 @@ htmlInit()
 settrace(my_tracer)
 
 # <__b_s__> is replaced with the code selected by the user by my-second-page.js
-def fibonacci(n):
-    f = [0, 1]
-    for i in range(2, n+1):
-        f.append(f[i-1] + f[i-2])
-    return f[n]
-# Calling the fibonacci function with n = 10
-result = fibonacci(10)
+import sys
 
-# Printing the result
-print(result)
+class Graph:
+    def __init__(self, vertices):
+        self.V = vertices
+        self.graph = []
+
+    def add_edge(self, u, v, w):
+        self.graph.append([u, v, w])
+
+    def bellman_ford(self, src):
+        dist = [sys.maxsize] * self.V
+        dist[src] = 0
+
+        for _ in range(self.V - 1):
+            for u, v, w in self.graph:
+                if dist[u] != sys.maxsize and dist[u] + w < dist[v]:
+                    dist[v] = dist[u] + w
+
+        for u, v, w in self.graph:
+            if dist[u] != sys.maxsize and dist[u] + w < dist[v]:
+                print("Graph contains a negative weight cycle")
+                return
+
+        self.print_solution(dist)
+
+    def print_solution(self, dist):
+        print("Vertex \tDistance from Source")
+        for i in range(self.V):
+            print(f"{i}\t{dist[i]}")
+
+if __name__ == "__main__":
+    g = Graph(5)
+    g.add_edge(0, 1, -1)
+    g.add_edge(0, 2, 4)
+    g.add_edge(1, 2, 3)
+    g.add_edge(1, 3, 2)
+    g.add_edge(1, 4, 2)
+    g.add_edge(3, 2, 5)
+    g.add_edge(3, 1, 1)
+    g.add_edge(4, 3, -3)
+
+    source = 0
+    g.bellman_ford(source)
 
 
 # Tracer function is set to None
