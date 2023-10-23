@@ -71,12 +71,37 @@ def my_tracer(frame, event, arg=None):
         print('The source code is:\n')
         print_executed_code(tracer_function_code)
 
+
         cfg = CFGBuilder().build_from_file("dot", "<__f__n__>")
         cfg.build_visual('dot', 'png')
+
+
         
+        # print('''
+		# <img src="dot.png" alt="Image" style="vertical-align:middle; width:1400px; height:800px;">
+		# ''')
+
+
+        # Modify the print statement to include a styled button and an initially hidden image with margin
         print('''
-		<img src="dot.png" alt="Image" style="vertical-align:middle; width:1600px; height:800px;">
-		''')
+        <button onclick="showImage()" style="margin: 10px; padding: 10px; background-color: #4caf50; color: white; border: none; cursor: pointer;">Static Analysis</button>
+        <img id="image" src="dot.png" alt="Image" style="display: none; vertical-align: middle; width: 1400px; height: 800px; margin: 10px;">
+        ''')
+
+        # Add JavaScript function to show/hide the image
+        print('''
+        <script>
+        function showImage() {
+            var image = document.getElementById('image');
+            if (image.style.display === 'none') {
+                image.style.display = 'block';
+            } else {
+                image.style.display = 'none';
+            }
+        }
+        </script>
+        ''')
+
         setattr(my_tracer, '_code_printed', True)
     # Local trace function is not executed for the following functions
     if func_name == 'encode' or func_name[0] == "<":

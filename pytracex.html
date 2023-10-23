@@ -181,19 +181,32 @@ The source code is:
 <pre><div class="code-line">    return f[n]</div></pre>
 <pre><div class="code-line"></div></pre>
 
-		<img src="dot.png" alt="Image" style="vertical-align:middle; width:1600px; height:800px;">
-		
+        <button onclick="showImage()" style="margin: 10px; padding: 10px; background-color: #4caf50; color: white; border: none; cursor: pointer;">Static Analysis</button>
+        <img id="image" src="dot.png" alt="Image" style="display: none; vertical-align: middle; width: 1400px; height: 800px; margin: 10px;">
+        
+
+        <script>
+        function showImage() {
+            var image = document.getElementById('image');
+            if (image.style.display === 'none') {
+                image.style.display = 'block';
+            } else {
+                image.style.display = 'none';
+            }
+        }
+        </script>
+        
 
 		<button onclick="myFunction('Demo0')" class="w3-btn w3-block w3-green w3-left-align" style = "font-size:20px"><module> Called (function) fibonacci with arguments<br>&nbsp;&nbsp;&nbsp;&nbsp;n &rarr; 10</button>
     	<div id="Demo0" class="w3-container w3-hide div_func_button">
 		
 <div class = "div_var_intro">n = 10 is introduced.</div> <br>
-<div class = "div_line_num">27</div> <div class = "div_code_text">    f = [0, 1]
+<div class = "div_line_num">52</div> <div class = "div_code_text">    f = [0, 1]
 </div> <br>
 <div class = "div_var_intro">f = [0, 1] is introduced.</div> <br>
 <div id = "ss0" class="slideshow-container">
 <div id="ms0" class="mySlides">
-<div class = "div_line_num">28</div> <div class = "div_code_text">    for i in <div class="tooltip">range
+<div class = "div_line_num">53</div> <div class = "div_code_text">    for i in <div class="tooltip">range
 <span class="tooltiptext">range(stop) -> range object
 range(start, stop[, step]) -> range object
 
@@ -205,7 +218,7 @@ When step is given, it specifies the increment (or decrement).</span>
 </div>(2, n+1):
 </div> <br>
 <div class = "div_var_intro">i = 2 is introduced.</div> <br>
-<div class = "div_line_num">29</div> <div class = "div_code_text">        <div class="tooltip">f
+<div class = "div_line_num">54</div> <div class = "div_code_text">        <div class="tooltip">f
 <span class="tooltiptext">Built-in mutable sequence.
 
 If no argument is given, the constructor creates a new empty list.
@@ -219,7 +232,7 @@ The argument must be an iterable if specified.</span>
 </div> = [0, 1] &rarr; [0, 1, 1]</div> <br>
 </div class = "temp">
 <div id="ms0" class="mySlides">
-<div class = "div_line_num">28</div> <div class = "div_code_text">    for i in <div class="tooltip">range
+<div class = "div_line_num">53</div> <div class = "div_code_text">    for i in <div class="tooltip">range
 <span class="tooltiptext">range(stop) -> range object
 range(start, stop[, step]) -> range object
 
@@ -233,7 +246,7 @@ When step is given, it specifies the increment (or decrement).</span>
 <div class = "div_var_mod"><div class="tooltip">i
 <span class="tooltiptext">2 &rarr; 3</span>
 </div> = 2 &rarr; 3</div> <br>
-<div class = "div_line_num">29</div> <div class = "div_code_text">        <div class="tooltip">f
+<div class = "div_line_num">54</div> <div class = "div_code_text">        <div class="tooltip">f
 <span class="tooltiptext">Built-in mutable sequence.
 
 If no argument is given, the constructor creates a new empty list.
@@ -247,7 +260,7 @@ The argument must be an iterable if specified.</span>
 </div> = [0, 1, 1] &rarr; [0, 1, 1, 2]</div> <br>
 </div class = "temp">
 <div id="ms0" class="mySlides">
-<div class = "div_line_num">28</div> <div class = "div_code_text">    for i in <div class="tooltip">range
+<div class = "div_line_num">53</div> <div class = "div_code_text">    for i in <div class="tooltip">range
 <span class="tooltiptext">range(stop) -> range object
 range(start, stop[, step]) -> range object
 
@@ -261,7 +274,7 @@ When step is given, it specifies the increment (or decrement).</span>
 <div class = "div_var_mod"><div class="tooltip">i
 <span class="tooltiptext">2 &rarr; 3 &rarr; 4</span>
 </div> = 3 &rarr; 4</div> <br>
-<div class = "div_line_num">29</div> <div class = "div_code_text">        <div class="tooltip">f
+<div class = "div_line_num">54</div> <div class = "div_code_text">        <div class="tooltip">f
 <span class="tooltiptext">Built-in mutable sequence.
 
 If no argument is given, the constructor creates a new empty list.
@@ -275,7 +288,7 @@ The argument must be an iterable if specified.</span>
 </div> = [0, 1, 1, 2] &rarr; [0, 1, 1, 2, 3]</div> <br>
 </div class = "temp">
 <div id="ms0" class="mySlides">
-<div class = "div_line_num">28</div> <div class = "div_code_text">    for i in <div class="tooltip">range
+<div class = "div_line_num">53</div> <div class = "div_code_text">    for i in <div class="tooltip">range
 <span class="tooltiptext">range(stop) -> range object
 range(start, stop[, step]) -> range object
 
@@ -289,7 +302,7 @@ When step is given, it specifies the increment (or decrement).</span>
 <div class = "div_var_mod"><div class="tooltip">i
 <span class="tooltiptext">2 &rarr; 3 &rarr; 4 &rarr; 5</span>
 </div> = 4 &rarr; 5</div> <br>
-<div class = "div_line_num">29</div> <div class = "div_code_text">        <div class="tooltip">f
+<div class = "div_line_num">54</div> <div class = "div_code_text">        <div class="tooltip">f
 <span class="tooltiptext">Built-in mutable sequence.
 
 If no argument is given, the constructor creates a new empty list.
@@ -303,7 +316,7 @@ The argument must be an iterable if specified.</span>
 </div> = [0, 1, 1, 2, 3] &rarr; [0, 1, 1, 2, 3, 5]</div> <br>
 </div class = "temp">
 <div id="ms0" class="mySlides">
-<div class = "div_line_num">28</div> <div class = "div_code_text">    for i in <div class="tooltip">range
+<div class = "div_line_num">53</div> <div class = "div_code_text">    for i in <div class="tooltip">range
 <span class="tooltiptext">range(stop) -> range object
 range(start, stop[, step]) -> range object
 
@@ -317,7 +330,7 @@ When step is given, it specifies the increment (or decrement).</span>
 <div class = "div_var_mod"><div class="tooltip">i
 <span class="tooltiptext">2 &rarr; 3 &rarr; 4 &rarr; 5 &rarr; 6</span>
 </div> = 5 &rarr; 6</div> <br>
-<div class = "div_line_num">29</div> <div class = "div_code_text">        <div class="tooltip">f
+<div class = "div_line_num">54</div> <div class = "div_code_text">        <div class="tooltip">f
 <span class="tooltiptext">Built-in mutable sequence.
 
 If no argument is given, the constructor creates a new empty list.
@@ -331,7 +344,7 @@ The argument must be an iterable if specified.</span>
 </div> = [0, 1, 1, 2, 3, 5] &rarr; [0, 1, 1, 2, 3, 5, 8]</div> <br>
 </div class = "temp">
 <div id="ms0" class="mySlides">
-<div class = "div_line_num">28</div> <div class = "div_code_text">    for i in <div class="tooltip">range
+<div class = "div_line_num">53</div> <div class = "div_code_text">    for i in <div class="tooltip">range
 <span class="tooltiptext">range(stop) -> range object
 range(start, stop[, step]) -> range object
 
@@ -345,7 +358,7 @@ When step is given, it specifies the increment (or decrement).</span>
 <div class = "div_var_mod"><div class="tooltip">i
 <span class="tooltiptext">2 &rarr; 3 &rarr; 4 &rarr; 5 &rarr; 6 &rarr; 7</span>
 </div> = 6 &rarr; 7</div> <br>
-<div class = "div_line_num">29</div> <div class = "div_code_text">        <div class="tooltip">f
+<div class = "div_line_num">54</div> <div class = "div_code_text">        <div class="tooltip">f
 <span class="tooltiptext">Built-in mutable sequence.
 
 If no argument is given, the constructor creates a new empty list.
@@ -359,7 +372,7 @@ The argument must be an iterable if specified.</span>
 </div> = [0, 1, 1, 2, 3, 5, 8] &rarr; [0, 1, 1, 2, 3, 5, 8, 13]</div> <br>
 </div class = "temp">
 <div id="ms0" class="mySlides">
-<div class = "div_line_num">28</div> <div class = "div_code_text">    for i in <div class="tooltip">range
+<div class = "div_line_num">53</div> <div class = "div_code_text">    for i in <div class="tooltip">range
 <span class="tooltiptext">range(stop) -> range object
 range(start, stop[, step]) -> range object
 
@@ -373,7 +386,7 @@ When step is given, it specifies the increment (or decrement).</span>
 <div class = "div_var_mod"><div class="tooltip">i
 <span class="tooltiptext">2 &rarr; 3 &rarr; 4 &rarr; 5 &rarr; 6 &rarr; 7 &rarr; 8</span>
 </div> = 7 &rarr; 8</div> <br>
-<div class = "div_line_num">29</div> <div class = "div_code_text">        <div class="tooltip">f
+<div class = "div_line_num">54</div> <div class = "div_code_text">        <div class="tooltip">f
 <span class="tooltiptext">Built-in mutable sequence.
 
 If no argument is given, the constructor creates a new empty list.
@@ -387,7 +400,7 @@ The argument must be an iterable if specified.</span>
 </div> = [0, 1, 1, 2, 3, 5, 8, 13] &rarr; [0, 1, 1, 2, 3, 5, 8, 13, 21]</div> <br>
 </div class = "temp">
 <div id="ms0" class="mySlides">
-<div class = "div_line_num">28</div> <div class = "div_code_text">    for i in <div class="tooltip">range
+<div class = "div_line_num">53</div> <div class = "div_code_text">    for i in <div class="tooltip">range
 <span class="tooltiptext">range(stop) -> range object
 range(start, stop[, step]) -> range object
 
@@ -401,7 +414,7 @@ When step is given, it specifies the increment (or decrement).</span>
 <div class = "div_var_mod"><div class="tooltip">i
 <span class="tooltiptext">2 &rarr; 3 &rarr; 4 &rarr; 5 &rarr; 6 &rarr; 7 &rarr; 8 &rarr; 9</span>
 </div> = 8 &rarr; 9</div> <br>
-<div class = "div_line_num">29</div> <div class = "div_code_text">        <div class="tooltip">f
+<div class = "div_line_num">54</div> <div class = "div_code_text">        <div class="tooltip">f
 <span class="tooltiptext">Built-in mutable sequence.
 
 If no argument is given, the constructor creates a new empty list.
@@ -415,7 +428,7 @@ The argument must be an iterable if specified.</span>
 </div> = [0, 1, 1, 2, 3, 5, 8, 13, 21] &rarr; [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]</div> <br>
 </div class = "temp">
 <div id="ms0" class="mySlides">
-<div class = "div_line_num">28</div> <div class = "div_code_text">    for i in <div class="tooltip">range
+<div class = "div_line_num">53</div> <div class = "div_code_text">    for i in <div class="tooltip">range
 <span class="tooltiptext">range(stop) -> range object
 range(start, stop[, step]) -> range object
 
@@ -429,7 +442,7 @@ When step is given, it specifies the increment (or decrement).</span>
 <div class = "div_var_mod"><div class="tooltip">i
 <span class="tooltiptext">2 &rarr; 3 &rarr; 4 &rarr; 5 &rarr; 6 &rarr; 7 &rarr; 8 &rarr; 9 &rarr; 10</span>
 </div> = 9 &rarr; 10</div> <br>
-<div class = "div_line_num">29</div> <div class = "div_code_text">        <div class="tooltip">f
+<div class = "div_line_num">54</div> <div class = "div_code_text">        <div class="tooltip">f
 <span class="tooltiptext">Built-in mutable sequence.
 
 If no argument is given, the constructor creates a new empty list.
@@ -443,7 +456,7 @@ The argument must be an iterable if specified.</span>
 </div> = [0, 1, 1, 2, 3, 5, 8, 13, 21, 34] &rarr; [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55]</div> <br>
 </div class = "temp">
 <div id="ms0" class="mySlides">
-<div class = "div_line_num">28</div> <div class = "div_code_text">    for i in <div class="tooltip">range
+<div class = "div_line_num">53</div> <div class = "div_code_text">    for i in <div class="tooltip">range
 <span class="tooltiptext">range(stop) -> range object
 range(start, stop[, step]) -> range object
 
@@ -458,7 +471,7 @@ When step is given, it specifies the increment (or decrement).</span>
 <a class="prev" onclick="plusSlides(-1,0)">&#10094;</a>
             <a class="next" onclick="plusSlides(1,0)">&#10095;</a>
             </div>
-<div class = "div_line_num">30</div> <div class = "div_code_text">    return f[n]
+<div class = "div_line_num">55</div> <div class = "div_code_text">    return f[n]
 </div> <br>
 
 		</div>
