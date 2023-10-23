@@ -73,34 +73,28 @@ def my_tracer(frame, event, arg=None):
 
 
         cfg = CFGBuilder().build_from_file("dot", "<__f__n__>")
-        cfg.build_visual('dot', 'png')
+        cfg.build_visual('dot', 'pdf')
 
-
-        
-        # print('''
-		# <img src="dot.png" alt="Image" style="vertical-align:middle; width:1400px; height:800px;">
-		# ''')
-
-
-        # Modify the print statement to include a styled button and an initially hidden image with margin
+        # Modify the print statement to include a styled button and an initially hidden PDF
         print('''
-        <button onclick="showImage()" style="margin: 10px; padding: 10px; background-color: #4caf50; color: white; border: none; cursor: pointer;">Static Analysis</button>
-        <img id="image" src="dot.png" alt="Image" style="display: none; vertical-align: middle; width: 1400px; height: 800px; margin: 10px;">
+        <button onclick="showPDF()" style="margin: 10px; padding: 10px; background-color: #4caf50; color: white; border: none; cursor: pointer;">Static Analysis</button>
+        <embed id="pdf" src="dot.pdf" type="application/pdf" style="display: none; width: 100%; height: 800px;">
         ''')
 
-        # Add JavaScript function to show/hide the image
+        # Add JavaScript function to show/hide the PDF
         print('''
         <script>
-        function showImage() {
-            var image = document.getElementById('image');
-            if (image.style.display === 'none') {
-                image.style.display = 'block';
+        function showPDF() {
+            var pdf = document.getElementById('pdf');
+            if (pdf.style.display === 'none') {
+                pdf.style.display = 'block';
             } else {
-                image.style.display = 'none';
+                pdf.style.display = 'none';
             }
         }
         </script>
         ''')
+
 
         setattr(my_tracer, '_code_printed', True)
     # Local trace function is not executed for the following functions
