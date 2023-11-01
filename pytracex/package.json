@@ -9,28 +9,13 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [
-    "onLanguage:python"
-  ],
+  "activationEvents": [],
   "main": "./extension.js",
   "contributes": {
-    "commands": [
-      {
-        "command": "pytracex.helloWorld",
-        "title": "Hello World"
-      },
-      {
-        "command": "pytracex.analyzePythonFile",
-        "title": "Analyze File"
-      }
-    ],
-    "keybindings": [
-      {
-        "key": "ctrl+alt+q",
-        "command": "pytracex.analyzePythonFile",
-        "when": "editorTextFocus && editorLangId == python"
-      }
-    ]
+    "commands": [{
+      "command": "pytracex.helloWorld",
+      "title": "Hello World"
+    }]
   },
   "scripts": {
     "lint": "eslint .",
@@ -38,17 +23,13 @@
     "test": "node ./test/runTest.js"
   },
   "devDependencies": {
-    "@types/mocha": "^10.0.2",
-    "@types/node": "^18.x",
     "@types/vscode": "^1.83.0",
-    "@vscode/test-electron": "^2.3.4",
+    "@types/mocha": "^10.0.2",
+    "@types/node": "18.x",
     "eslint": "^8.50.0",
     "glob": "^10.3.3",
     "mocha": "^10.2.0",
-    "typescript": "^5.2.2"
-  },
-  "dependencies": {
-    "shell": "^0.5.1",
-    "shelljs": "^0.8.5"
+    "typescript": "^5.2.2",
+    "@vscode/test-electron": "^2.3.4"
   }
 }
