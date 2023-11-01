@@ -1,0 +1,7 @@
+[
+    {
+        "key": "ctrl+alt+q",
+        "command": "pytracex.analyzePythonFile",
+        "when": "editorLangId == python"
+    }
+]

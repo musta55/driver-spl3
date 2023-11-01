@@ -1,0 +1,54 @@
+{
+  "name": "pytracex",
+  "displayName": "pytracex",
+  "description": "Python program comprehension tool for novice programmers",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.83.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:python"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "pytracex.helloWorld",
+        "title": "Hello World"
+      },
+      {
+        "command": "pytracex.analyzePythonFile",
+        "title": "Analyze File"
+      }
+    ],
+    "keybindings": [
+      {
+        "key": "ctrl+alt+q",
+        "command": "pytracex.analyzePythonFile",
+        "when": "editorTextFocus && editorLangId == python"
+      }
+    ]
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "node ./test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.2",
+    "@types/node": "^18.x",
+    "@types/vscode": "^1.83.0",
+    "@vscode/test-electron": "^2.3.4",
+    "eslint": "^8.50.0",
+    "glob": "^10.3.3",
+    "mocha": "^10.2.0",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "shell": "^0.5.1",
+    "shelljs": "^0.8.5"
+  }
+}
