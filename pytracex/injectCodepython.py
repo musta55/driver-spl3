@@ -72,8 +72,8 @@ def my_tracer(frame, event, arg=None):
         print_executed_code(tracer_function_code)
 
 
-        cfg = CFGBuilder().build_from_file("dot", "<__f__n__>")
-        cfg.build_visual('dot', 'pdf')
+        cfg = CFGBuilder().build_from_file("pytracex", "<__f__n__>")
+        # cfg.build_visual('pytracex', 'pdf')
 
         # Modify the print statement to include a styled button and an initially hidden PDF
         print('''

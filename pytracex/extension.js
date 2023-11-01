@@ -1,87 +1,77 @@
 const vscode = require('vscode');
 const fs = require('fs');
 const path = require('path');
-const shell = require('node-powershell');
 
 function analyzeFile(filePath) {
-    // Read the content of the selected file
-    const fileContent = fs.readFileSync(filePath, 'utf-8');
-    
-    // Load the Python code template
-    const pythonCodeTemplatePath = path.join(__dirname, 'injectCodepython.py');
-    const pythonCodeTemplate = fs.readFileSync(pythonCodeTemplatePath, 'utf-8');
-    
-    // Replace placeholders with actual file content
-    const pythonCode = pythonCodeTemplate
-        .replace(/<__b__s__>/gi, fileContent)
-        .replace(/<__f__n__>/gi, path.basename(filePath));
-    
-    // Create a temporary Python script
-    const pythonScriptPath = path.join(__dirname, 'python_output.py');
-    fs.writeFileSync(pythonScriptPath, pythonCode, 'utf-8');
-    
-    // Create a new PowerShell instance
-    const ps = new shell({
-        executionPolicy: 'Bypass',
-        noProfile: true
+  // Read the content of the selected file
+  const fileContent = fs.readFileSync(filePath, 'utf-8');
+
+  // Load the Python code template
+  const pythonCodeTemplatePath = path.join(__dirname, 'injectCodepython.py');
+  const pythonCodeTemplate = fs.readFileSync(pythonCodeTemplatePath, 'utf-8');
+
+  // Replace placeholders with actual file content
+  const pythonCode = pythonCodeTemplate
+    .replace(/<__b__s__>/gi, fileContent)
+    .replace(/<__f__n__>/gi, path.basename(filePath));
+
+  // Create a temporary Python script
+  const pythonScriptPath = path.join(__dirname, 'python_output.py');
+  fs.writeFileSync(pythonScriptPath, pythonCode, 'utf-8');
+
+  // Open the generated HTML file in a separate window using "Live Server"
+  const webpagePath = path.join(__dirname, 'pytracex.html');
+  openWithLiveServer(webpagePath);
+}
+
+function openWithLiveServer(webpagePath) {
+  // Open the HTML file with Live Server in a separate window
+  const liveServerExtension = vscode.extensions.getExtension('ritwickdey.LiveServer');
+  if (liveServerExtension) {
+    vscode.window.showInformationMessage('Hello World from Live server!');
+    liveServerExtension.activate().then((api) => {
+      // Open the HTML file in a new browser window
+      api.openFile(webpagePath, {
+        newWindow: true,
+      });
     });
-    
-    // Change the working directory to the script's location
-    ps.addCommand(`cd "${__dirname}"`);
-
-    
-    // Execute the Python script
-    ps.addCommand('py python_output.py');
-    
-    ps.invoke()
-        .then(output => {
-            // Open the generated HTML file in a web browser
-            const webpagePath = path.join(__dirname, 'pytracex.html');
-            openWebpage(webpagePath);
-
-        })
-        .catch(err => {
-            console.error(err);
-        });
+  } else {
+    vscode.window.showErrorMessage('Live Server extension is not installed.');
+  }
 }
 
-function openWebpage(webpagePath) {
-    // Depending on your platform, you can open a webpage using the default web browser
-    // This code works on Windows, macOS, and Linux
-    const { exec } = require('child_process');
-    switch (process.platform) {
-        case 'darwin':
-            exec(`open ${webpagePath}`);
-            break;
-        case 'win32':
-            exec(`start ${webpagePath}`);
-            break;
-        default:
-            exec(`xdg-open ${webpagePath}`);
-            break;
-    }
-}
+vscode.commands.registerCommand('pytracex.openHtmlPreview', async (uri) => {
+  // Open the HTML file in a new webview
+  const webViewPanel = vscode.window.createWebviewPanel('pytracex.htmlPreview', 'PyTracerX: HTML Preview', vscode.ViewColumn.One, {
+    enableScripts: true,
+  });
+
+  // Set the webview content to the HTML file
+  webViewPanel.webview.html = fs.readFileSync(uri.fsPath, 'utf-8');
+
+  // Show the webview panel
+  webViewPanel.reveal();
+});
 
 /**
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
+  console.log('Congratulations, your extension "pytracex" is now active!');
 
-	console.log('Congratulations, your extension "pytracex" is now active!');
+  let disposable = vscode.commands.registerCommand('pytracex.helloWorld', function () {
+    const filePathToExamine = 'F:/8th Semester/SPL3/driver-spl3/pytracex/Calc_profit.py';
+    analyzeFile(filePathToExamine);
 
-	let disposable = vscode.commands.registerCommand('pytracex.helloWorld', function () {
+    vscode.window.showInformationMessage('Hello World from Musta!');
+  });
 
-		const filePathToExamine = 'F:/8th Semester/SPL3/driver-spl3/pytracex/Fibonacci.py';
-		analyzeFile(filePathToExamine);
-		vscode.window.showInformationMessage('Hello World from Musta!');
-	});
-
-	context.subscriptions.push(disposable);
+  context.subscriptions.push(disposable);
 }
 
 function deactivate() {}
 
 module.exports = {
-	activate,
-	deactivate
-}
+  activate,
+  deactivate
+};
