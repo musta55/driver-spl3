@@ -23,27 +23,16 @@ function analyzeFile(filePath) {
 
   // Open the generated HTML file with Live Server
   const webpagePath = path.join(__dirname, 'pytracex.html');
-  openWithLiveServer(webpagePath);
+
+    // Example: Show the results in a VS Code panel or output channel
+    const outputChannel = vscode.window.createOutputChannel('Your Extension Output');
+    outputChannel.appendLine('Analysis results:');
+    // Append more output as needed
+    outputChannel.show();
+
 }
 
 
-function openWithLiveServer(webpagePath) {
-  // Open the HTML file with Live Server in a separate window
-  const liveServerExtension = vscode.extensions.getExtension('ritwickdey.LiveServer');
-  if (liveServerExtension) {
-    vscode.window.showInformationMessage('Hello World from Live server!');
-    liveServerExtension.activate().then((api) => {
-      // Open the HTML file in a new browser window
-      api.openFile(webpagePath, {
-        newWindow: true,
-      });
-    });
-  } else {
-    vscode.window.showErrorMessage('Live Server extension is not installed.');
-  }
-
-  console.log("Open live server function")
-}
 
 vscode.commands.registerCommand('pytracex.openHtmlPreview', async (uri) => {
   // Open the HTML file in a new webview
@@ -70,13 +59,12 @@ vscode.commands.registerCommand('pytracex.analyzePythonFile', async (uri) => {
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
-  console.log('Congratulations, your extension "pytracex" is now active!');
-
-  let disposable = vscode.commands.registerCommand('pytracex.helloWorld', function () {
-    const filePathToExamine = 'F:/8th Semester/SPL3/driver-spl3/pytracex/Fibonacci.py';
-    analyzeFile(filePathToExamine);
-
-    vscode.window.showInformationMessage('Hello World from Musta!');
+  const disposable = vscode.commands.registerCommand('pytracex.analyzeCurrentFile', () => {
+    const activeEditor = vscode.window.activeTextEditor;
+    if (activeEditor) {
+      const filePath = activeEditor.document.uri.fsPath;
+      analyzeFile(filePath);
+    }
   });
 
   context.subscriptions.push(disposable);
@@ -88,3 +76,4 @@ module.exports = {
   activate,
   deactivate
 };
+

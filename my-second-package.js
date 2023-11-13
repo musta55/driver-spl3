@@ -1,4 +1,5 @@
 const fs = require('fs');
+const { exec } = require('child_process');
 const path = require('path');
 const shell = require('node-powershell');
 
@@ -43,23 +44,25 @@ function analyzeFile(filePath) {
         });
 }
 
+
 function openWebpage(webpagePath) {
-    // Depending on your platform, you can open a webpage using the default web browser
-    // This code works on Windows, macOS, and Linux
-    const { exec } = require('child_process');
+
     switch (process.platform) {
         case 'darwin':
-            exec(`open ${webpagePath}`);
+            exec(`open "${webpagePath}"`);
             break;
         case 'win32':
-            exec(`start ${webpagePath}`);
+            exec(`start "" "${webpagePath}"`);
             break;
         default:
-            exec(`xdg-open ${webpagePath}`);
+            exec(`xdg-open "${webpagePath}"`);
             break;
     }
 }
 
-// Usage: Call the analyzeFile function with the path to the file you want to examine
-const filePathToExamine = 'Calc_profit.py';
-analyzeFile(filePathToExamine);
+const filePathToExamine = process.argv[2] || "lcs.py";
+if (filePathToExamine) {
+    analyzeFile(filePathToExamine);
+} else {
+    console.error('Usage: node your-script.js <file-path-to-examine>');
+}

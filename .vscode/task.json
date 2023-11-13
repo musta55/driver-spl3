@@ -1,0 +1,15 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run Python Script",
+            "type": "shell",
+            "command": "python",
+            "args": ["${file}"],
+            "presentation": {
+                "reveal": "always",
+                "focus": true
+            }
+        }
+    ]
+}

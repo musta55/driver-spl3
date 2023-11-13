@@ -72,7 +72,7 @@ def my_tracer(frame, event, arg=None):
         print_executed_code(tracer_function_code)
 
 
-        cfg = CFGBuilder().build_from_file("pytracex", "Fibonacci.py")
+        cfg = CFGBuilder().build_from_file("dot", "<__f__n__>")
         cfg.build_visual('dot', 'pdf')
 
         # Modify the print statement to include a styled button and an initially hidden PDF
@@ -369,7 +369,7 @@ def htmlInit():
     sys.stdout = f
 
     # Initializes the webpage along with the CSS
-    # NOTE: Fibonacci.py is replaced with the name of the file by my-second-page.js
+    # NOTE: <__f__n__> is replaced with the name of the file by my-second-page.js
     print('''
 		<!DOCTYPE html>
 		<html>
@@ -540,7 +540,7 @@ def htmlInit():
 		<body>
 		<div class="w3-container">
 
-		<h2>Filename : Fibonacci.py</h2>
+		<h2>Filename : <__f__n__></h2>
     <hr>
 		<p>Open and collapse the accordian to see the summary</p>
 	''')
@@ -552,17 +552,7 @@ htmlInit()
 settrace(my_tracer)
 
 # <__b_s__> is replaced with the code selected by the user by my-second-page.js
-def fibonacci(n):
-    f = [0, 1]
-    for i in range(2, n+1):
-        f.append(f[i-1] + f[i-2])
-    return f[n]
-# Calling the fibonacci function with n = 10
-result = fibonacci(10)
-
-# Printing the result
-print(result)
-
+<__b__s__>
 
 # Tracer function is set to None
 settrace(None)

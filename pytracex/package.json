@@ -9,13 +9,25 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
-  "main": "./extension.js",
+  "activationEvents": [
+    "onCommand:extension.analyzeCurrentFile" 
+  ],
+  "main": "./extension.js", 
   "contributes": {
-    "commands": [{
-      "command": "pytracex.helloWorld",
-      "title": "Hello World"
-    }]
+    "commands": [
+      {
+        "command": "pytracex.analyzeCurrentFile", 
+        "title": "Analyze Current File"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "extension.analyzeCurrentFile", 
+        "key": "ctrl+alt+f",  
+        "mac": "cmd+alt+f",
+        "when": "editorTextFocus" 
+      }
+    ]
   },
   "scripts": {
     "lint": "eslint .",

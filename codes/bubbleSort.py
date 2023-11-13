@@ -10,4 +10,6 @@ numbers = [5, 2, 9, 1, 3]
 
 print("Before sorting:", numbers)
 bubble_sort(numbers)
+
+
 print("After sorting:", numbers)
