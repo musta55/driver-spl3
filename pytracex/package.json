@@ -1,38 +1,32 @@
 {
   "name": "pytracex",
-  "displayName": "pytracex",
+  "displayName": "PyTracerX",
   "description": "Python program comprehension tool for novice programmers",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.83.0"
   },
-  "categories": [
-    "Other"
-  ],
-  "activationEvents": [
-    "onCommand:extension.analyzeCurrentFile" 
-  ],
-  "main": "./extension.js", 
+  "categories": ["Other"],
+  "activationEvents": ["onCommand:pytracex.analyzeCurrentFile"],
+  "main": "./extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "pytracex.analyzeCurrentFile", 
-        "title": "Analyze Current File"
+        "command": "pytracex.analyzePythonFile",
+        "title": "Analyze Python File"
       }
     ],
-    "keybindings": [
-      {
-        "command": "extension.analyzeCurrentFile", 
-        "key": "ctrl+alt+f",  
-        "mac": "cmd+alt+f",
-        "when": "editorTextFocus" 
-      }
-    ]
+      "keybindings": [
+          {
+              "command": "pytracex.analyzePythonFile",
+              "key": "ctrl+alt+x",
+              "mac": "shift+cmd+f"
+          }
+      ]
   },
   "scripts": {
-    "lint": "eslint .",
-    "pretest": "npm run lint",
-    "test": "node ./test/runTest.js"
+      "postinstall": "node ./node_modules/vscode/bin/install",
+      "test": "node ./node_modules/vscode/bin/test"
   },
   "devDependencies": {
     "@types/vscode": "^1.83.0",

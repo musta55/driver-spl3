@@ -72,7 +72,7 @@ def my_tracer(frame, event, arg=None):
         print_executed_code(tracer_function_code)
 
 
-        cfg = CFGBuilder().build_from_file("dot", "lcs.py")
+        cfg = CFGBuilder().build_from_file("dot", "Longest_common_subsequence.py")
         cfg.build_visual('dot', 'pdf')
 
         # Modify the print statement to include a styled button and an initially hidden PDF
@@ -369,7 +369,7 @@ def htmlInit():
     sys.stdout = f
 
     # Initializes the webpage along with the CSS
-    # NOTE: lcs.py is replaced with the name of the file by my-second-page.js
+    # NOTE: Longest_common_subsequence.py is replaced with the name of the file by my-second-page.js
     print('''
 		<!DOCTYPE html>
 		<html>
@@ -540,7 +540,7 @@ def htmlInit():
 		<body>
 		<div class="w3-container">
 
-		<h2>Filename : lcs.py</h2>
+		<h2>Filename : Longest_common_subsequence.py</h2>
     <hr>
 		<p>Open and collapse the accordian to see the summary</p>
 	''')
@@ -552,52 +552,30 @@ htmlInit()
 settrace(my_tracer)
 
 # <__b_s__> is replaced with the code selected by the user by my-second-page.js
-def longest_common_subsequence(x: str, y: str):
+def pathSum(root, targetSum):
+    def dfs(node, currentSum):
+        if not node:
+            return 0
+        currentSum += node.val
+        count = 1 if currentSum == targetSum else 0
+        count += dfs(node.left, currentSum)
+        count += dfs(node.right, currentSum)
+        return count
 
-    m = len(x)
-    n = len(y)
+    if not root:
+        return 0
 
-    dp = [[0] * (n + 1) for _ in range(m + 1)]
+    return dfs(root, 0) + pathSum(root.left, targetSum) + pathSum(root.right, targetSum)
 
-    # Fill in the dynamic programming table
-    for i in range(1, m + 1):
-        for j in range(1, n + 1):
-            if x[i - 1] == y[j - 1]:
-                match = 1
-            else:
-                match = 0
+# Create a sample binary tree (one-liner test input)
+root = [10,5,-3,3,2,None,11,3,-2,None,1]
+target_sum = 8
 
-            dp[i][j] = max(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1] + match)
+# Function call with the test input
+result = pathSum(root, target_sum)
 
-    seq = ""
-    i, j = m, n
-    while i > 0 and j > 0:
-        if x[i - 1] == y[j - 1]:
-            match = 1
-        else:
-            match = 0
-
-        if dp[i][j] == dp[i - 1][j - 1] + match:
-            if match == 1:
-                seq = x[i - 1] + seq
-            i -= 1
-            j -= 1
-        elif dp[i][j] == dp[i - 1][j]:
-            i -= 1
-        else:
-            j -= 1
-
-    return dp[m][n], seq
-
-if __name__ == "__main__":
-    string1 = "AGGTABC"
-    string2 = "GXTXAYBWC"
-    expected_length = 5
-    expected_subseq = "GTABC"
-
-    length, subsequence = longest_common_subsequence(string1, string2)
-    print("Length of LCS:", length)
-    print("Longest Common Subsequence:", subsequence)
+# Print the result
+print(result)  # Output: 3
 
 
 # Tracer function is set to None
