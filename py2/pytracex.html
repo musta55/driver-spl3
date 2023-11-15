@@ -168,77 +168,17 @@
 		<body>
 		<div class="w3-container">
 
-		<h2>Filename : Calc_profit.py</h2>
+		<h2>Filename : Fibonacci.py</h2>
     <hr>
 		<p>Open and collapse the accordian to see the summary</p>
 	
 The source code is:
 
-<pre><div class="code-line">def calc_profit(profit: list, weight: list, max_weight: int) -> int:</div></pre>
-<pre><div class="code-line">    """</div></pre>
-<pre><div class="code-line">    Function description is as follows-</div></pre>
-<pre><div class="code-line">    :param profit: Take a list of profits</div></pre>
-<pre><div class="code-line">    :param weight: Take a list of weight if bags corresponding to the profits</div></pre>
-<pre><div class="code-line">    :param max_weight: Maximum weight that could be carried</div></pre>
-<pre><div class="code-line">    :return: Maximum expected gain</div></pre>
-<pre><div class="code-line">    >>> calc_profit([1, 2, 3], [3, 4, 5], 15)</div></pre>
-<pre><div class="code-line">    6</div></pre>
-<pre><div class="code-line">    >>> calc_profit([10, 9 , 8], [3 ,4 , 5], 25)</div></pre>
-<pre><div class="code-line">    27</div></pre>
-<pre><div class="code-line">    """</div></pre>
-<pre><div class="code-line">    if len(profit) != len(weight):</div></pre>
-<pre><div class="code-line">        raise ValueError("The length of profit and weight must be same.")</div></pre>
-<pre><div class="code-line">    if max_weight <= 0:</div></pre>
-<pre><div class="code-line">        raise ValueError("max_weight must greater than zero.")</div></pre>
-<pre><div class="code-line">    if any(p < 0 for p in profit):</div></pre>
-<pre><div class="code-line">        raise ValueError("Profit can not be negative.")</div></pre>
-<pre><div class="code-line">    if any(w < 0 for w in weight):</div></pre>
-<pre><div class="code-line">        raise ValueError("Weight can not be negative.")</div></pre>
-<pre><div class="code-line"></div></pre>
-<pre><div class="code-line">    # List created to store profit gained for the 1kg in case of each weight</div></pre>
-<pre><div class="code-line">    # respectively.  Calculate and append profit/weight for each element.</div></pre>
-<pre><div class="code-line">    profit_by_weight = [p / w for p, w in zip(profit, weight)]</div></pre>
-<pre><div class="code-line"></div></pre>
-<pre><div class="code-line">    # Creating a copy of the list and sorting profit/weight in ascending order</div></pre>
-<pre><div class="code-line">    sorted_profit_by_weight = sorted(profit_by_weight)</div></pre>
-<pre><div class="code-line"></div></pre>
-<pre><div class="code-line">    # declaring useful variables</div></pre>
-<pre><div class="code-line">    length = len(sorted_profit_by_weight)</div></pre>
-<pre><div class="code-line">    limit = 0</div></pre>
-<pre><div class="code-line">    gain = 0</div></pre>
-<pre><div class="code-line">    i = 0</div></pre>
-<pre><div class="code-line">    test = []</div></pre>
-<pre><div class="code-line"></div></pre>
-<pre><div class="code-line">    # loop till the total weight do not reach max limit e.g. 15 kg and till i<length</div></pre>
-<pre><div class="code-line">    while limit <= max_weight and i < length:</div></pre>
-<pre><div class="code-line">        # flag value for encountered greatest element in sorted_profit_by_weight</div></pre>
-<pre><div class="code-line">        biggest_profit_by_weight = sorted_profit_by_weight[length - i - 1]</div></pre>
-<pre><div class="code-line">        """</div></pre>
-<pre><div class="code-line">        Calculate the index of the biggest_profit_by_weight in profit_by_weight list.</div></pre>
-<pre><div class="code-line">        This will give the index of the first encountered element which is same as of</div></pre>
-<pre><div class="code-line">        biggest_profit_by_weight.  There may be one or more values same as that of</div></pre>
-<pre><div class="code-line">        biggest_profit_by_weight but index always encounter the very first element</div></pre>
-<pre><div class="code-line">        only.  To curb this alter the values in profit_by_weight once they are used</div></pre>
-<pre><div class="code-line">        here it is done to -1 because neither profit nor weight can be in negative.</div></pre>
-<pre><div class="code-line">        """</div></pre>
-<pre><div class="code-line">        index = profit_by_weight.index(biggest_profit_by_weight)</div></pre>
-<pre><div class="code-line">        profit_by_weight[index] = -1</div></pre>
-<pre><div class="code-line"></div></pre>
-<pre><div class="code-line">        # check if the weight encountered is less than the total weight</div></pre>
-<pre><div class="code-line">        # encountered before.</div></pre>
-<pre><div class="code-line">        if max_weight - limit >= weight[index]:</div></pre>
-<pre><div class="code-line">            limit += weight[index]</div></pre>
-<pre><div class="code-line">            # Adding profit gained for the given weight 1 ===</div></pre>
-<pre><div class="code-line">            # weight[index]/weight[index]</div></pre>
-<pre><div class="code-line">            gain += 1 * profit[index]</div></pre>
-<pre><div class="code-line">        else:</div></pre>
-<pre><div class="code-line">            # Since the weight encountered is greater than limit, therefore take the</div></pre>
-<pre><div class="code-line">            # required number of remaining kgs and calculate profit for it.</div></pre>
-<pre><div class="code-line">            # weight remaining / weight[index]</div></pre>
-<pre><div class="code-line">            gain += (max_weight - limit) / weight[index] * profit[index]</div></pre>
-<pre><div class="code-line">            break</div></pre>
-<pre><div class="code-line">        i += 1</div></pre>
-<pre><div class="code-line">    return gain</div></pre>
+<pre><div class="code-line">def fibonacci(n):</div></pre>
+<pre><div class="code-line">    f = [0, 1]</div></pre>
+<pre><div class="code-line">    for i in range(2, n+1):</div></pre>
+<pre><div class="code-line">        f.append(f[i-1] + f[i-2])</div></pre>
+<pre><div class="code-line">    return f[n]</div></pre>
 <pre><div class="code-line"></div></pre>
 
         <button onclick="showPDF()" style="margin: 10px; padding: 10px; background-color: #4caf50; color: white; border: none; cursor: pointer;">Static Analysis</button>
@@ -257,594 +197,289 @@ The source code is:
         </script>
         
 
-		<button onclick="myFunction('Demo0')" class="w3-btn w3-block w3-green w3-left-align" style = "font-size:20px"><module> Called (function) calc_profit with arguments<br>&nbsp;&nbsp;&nbsp;&nbsp;profit &rarr; [5, 8, 7, 1, 12, 3, 4]<br>&nbsp;&nbsp;&nbsp;&nbsp;weight &rarr; [2, 7, 1, 6, 4, 2, 5]<br>&nbsp;&nbsp;&nbsp;&nbsp;max_weight &rarr; 100</button>
+		<button onclick="myFunction('Demo0')" class="w3-btn w3-block w3-green w3-left-align" style = "font-size:20px"><module> Called (function) fibonacci with arguments<br>&nbsp;&nbsp;&nbsp;&nbsp;n &rarr; 10</button>
     	<div id="Demo0" class="w3-container w3-hide div_func_button">
 		
-<div class = "div_var_intro">profit = [5, 8, 7, 1, 12, 3, 4] is introduced.</div> <br>
-<div class = "div_var_intro">weight = [2, 7, 1, 6, 4, 2, 5] is introduced.</div> <br>
-<div class = "div_var_intro">max_weight = 100 is introduced.</div> <br>
-<div class = "div_line_num">58</div> <div class = "div_code_text">    if <div class="tooltip">len
-<span class="tooltiptext">Return the number of items in a container.</span>
-</div>(profit) != len(weight):
+<div class = "div_var_intro">n = 10 is introduced.</div> <br>
+<div class = "div_line_num">46</div> <div class = "div_code_text">    f = [0, 1]
 </div> <br>
-<div class = "div_var_intro">False</div><br>
-<div class = "div_line_num">60</div> <div class = "div_code_text">    if max_weight <= 0:
-</div> <br>
-<div class = "div_var_intro">False</div><br>
+<div class = "div_var_intro">f = [0, 1] is introduced.</div> <br>
 <div id = "ss0" class="slideshow-container">
 <div id="ms0" class="mySlides">
-<div class = "div_line_num">62</div> <div class = "div_code_text">    if <div class="tooltip">any
-<span class="tooltiptext">Return True if bool(x) is True for any x in the iterable.
+<div class = "div_line_num">47</div> <div class = "div_code_text">    for i in <div class="tooltip">range
+<span class="tooltiptext">range(stop) -> range object
+range(start, stop[, step]) -> range object
 
-If the iterable is empty, return False.</span>
-</div>(p < 0 for p in profit):
+Return an object that produces a sequence of integers from start (inclusive)
+to stop (exclusive) by step.  range(i, j) produces i, i+1, i+2, ..., j-1.
+start defaults to 0, and stop is omitted!  range(4) produces 0, 1, 2, 3.
+These are exactly the valid indices for a list of 4 elements.
+When step is given, it specifies the increment (or decrement).</span>
+</div>(2, n+1):
 </div> <br>
-<div class = "div_var_intro">False</div><br>
+<div class = "div_var_intro">i = 2 is introduced.</div> <br>
+<div class = "div_line_num">48</div> <div class = "div_code_text">        <div class="tooltip">f
+<span class="tooltiptext">Built-in mutable sequence.
+
+If no argument is given, the constructor creates a new empty list.
+The argument must be an iterable if specified.</span>
+</div><div class="tooltip">.append
+<span class="tooltiptext">Append object to the end of the list.</span>
+</div>(f[i-1] + f[i-2])
+</div> <br>
+<div class = "div_var_mod"><div class="tooltip">f
+<span class="tooltiptext">[0, 1] &rarr; [0, 1, 1]</span>
+</div> = [0, 1] &rarr; [0, 1, 1]</div> <br>
+</div class = "temp">
+<div id="ms0" class="mySlides">
+<div class = "div_line_num">47</div> <div class = "div_code_text">    for i in <div class="tooltip">range
+<span class="tooltiptext">range(stop) -> range object
+range(start, stop[, step]) -> range object
+
+Return an object that produces a sequence of integers from start (inclusive)
+to stop (exclusive) by step.  range(i, j) produces i, i+1, i+2, ..., j-1.
+start defaults to 0, and stop is omitted!  range(4) produces 0, 1, 2, 3.
+These are exactly the valid indices for a list of 4 elements.
+When step is given, it specifies the increment (or decrement).</span>
+</div>(2, n+1):
+</div> <br>
+<div class = "div_var_mod"><div class="tooltip">i
+<span class="tooltiptext">2 &rarr; 3</span>
+</div> = 2 &rarr; 3</div> <br>
+<div class = "div_line_num">48</div> <div class = "div_code_text">        <div class="tooltip">f
+<span class="tooltiptext">Built-in mutable sequence.
+
+If no argument is given, the constructor creates a new empty list.
+The argument must be an iterable if specified.</span>
+</div><div class="tooltip">.append
+<span class="tooltiptext">Append object to the end of the list.</span>
+</div>(f[i-1] + f[i-2])
+</div> <br>
+<div class = "div_var_mod"><div class="tooltip">f
+<span class="tooltiptext">[0, 1] &rarr; [0, 1, 1] &rarr; [0, 1, 1, 2]</span>
+</div> = [0, 1, 1] &rarr; [0, 1, 1, 2]</div> <br>
+</div class = "temp">
+<div id="ms0" class="mySlides">
+<div class = "div_line_num">47</div> <div class = "div_code_text">    for i in <div class="tooltip">range
+<span class="tooltiptext">range(stop) -> range object
+range(start, stop[, step]) -> range object
+
+Return an object that produces a sequence of integers from start (inclusive)
+to stop (exclusive) by step.  range(i, j) produces i, i+1, i+2, ..., j-1.
+start defaults to 0, and stop is omitted!  range(4) produces 0, 1, 2, 3.
+These are exactly the valid indices for a list of 4 elements.
+When step is given, it specifies the increment (or decrement).</span>
+</div>(2, n+1):
+</div> <br>
+<div class = "div_var_mod"><div class="tooltip">i
+<span class="tooltiptext">2 &rarr; 3 &rarr; 4</span>
+</div> = 3 &rarr; 4</div> <br>
+<div class = "div_line_num">48</div> <div class = "div_code_text">        <div class="tooltip">f
+<span class="tooltiptext">Built-in mutable sequence.
+
+If no argument is given, the constructor creates a new empty list.
+The argument must be an iterable if specified.</span>
+</div><div class="tooltip">.append
+<span class="tooltiptext">Append object to the end of the list.</span>
+</div>(f[i-1] + f[i-2])
+</div> <br>
+<div class = "div_var_mod"><div class="tooltip">f
+<span class="tooltiptext">[0, 1] &rarr; [0, 1, 1] &rarr; [0, 1, 1, 2] &rarr; [0, 1, 1, 2, 3]</span>
+</div> = [0, 1, 1, 2] &rarr; [0, 1, 1, 2, 3]</div> <br>
+</div class = "temp">
+<div id="ms0" class="mySlides">
+<div class = "div_line_num">47</div> <div class = "div_code_text">    for i in <div class="tooltip">range
+<span class="tooltiptext">range(stop) -> range object
+range(start, stop[, step]) -> range object
+
+Return an object that produces a sequence of integers from start (inclusive)
+to stop (exclusive) by step.  range(i, j) produces i, i+1, i+2, ..., j-1.
+start defaults to 0, and stop is omitted!  range(4) produces 0, 1, 2, 3.
+These are exactly the valid indices for a list of 4 elements.
+When step is given, it specifies the increment (or decrement).</span>
+</div>(2, n+1):
+</div> <br>
+<div class = "div_var_mod"><div class="tooltip">i
+<span class="tooltiptext">2 &rarr; 3 &rarr; 4 &rarr; 5</span>
+</div> = 4 &rarr; 5</div> <br>
+<div class = "div_line_num">48</div> <div class = "div_code_text">        <div class="tooltip">f
+<span class="tooltiptext">Built-in mutable sequence.
+
+If no argument is given, the constructor creates a new empty list.
+The argument must be an iterable if specified.</span>
+</div><div class="tooltip">.append
+<span class="tooltiptext">Append object to the end of the list.</span>
+</div>(f[i-1] + f[i-2])
+</div> <br>
+<div class = "div_var_mod"><div class="tooltip">f
+<span class="tooltiptext">[0, 1] &rarr; [0, 1, 1] &rarr; [0, 1, 1, 2] &rarr; [0, 1, 1, 2, 3] &rarr; [0, 1, 1, 2, 3, 5]</span>
+</div> = [0, 1, 1, 2, 3] &rarr; [0, 1, 1, 2, 3, 5]</div> <br>
+</div class = "temp">
+<div id="ms0" class="mySlides">
+<div class = "div_line_num">47</div> <div class = "div_code_text">    for i in <div class="tooltip">range
+<span class="tooltiptext">range(stop) -> range object
+range(start, stop[, step]) -> range object
+
+Return an object that produces a sequence of integers from start (inclusive)
+to stop (exclusive) by step.  range(i, j) produces i, i+1, i+2, ..., j-1.
+start defaults to 0, and stop is omitted!  range(4) produces 0, 1, 2, 3.
+These are exactly the valid indices for a list of 4 elements.
+When step is given, it specifies the increment (or decrement).</span>
+</div>(2, n+1):
+</div> <br>
+<div class = "div_var_mod"><div class="tooltip">i
+<span class="tooltiptext">2 &rarr; 3 &rarr; 4 &rarr; 5 &rarr; 6</span>
+</div> = 5 &rarr; 6</div> <br>
+<div class = "div_line_num">48</div> <div class = "div_code_text">        <div class="tooltip">f
+<span class="tooltiptext">Built-in mutable sequence.
+
+If no argument is given, the constructor creates a new empty list.
+The argument must be an iterable if specified.</span>
+</div><div class="tooltip">.append
+<span class="tooltiptext">Append object to the end of the list.</span>
+</div>(f[i-1] + f[i-2])
+</div> <br>
+<div class = "div_var_mod"><div class="tooltip">f
+<span class="tooltiptext">[0, 1] &rarr; [0, 1, 1] &rarr; [0, 1, 1, 2] &rarr; [0, 1, 1, 2, 3] &rarr; [0, 1, 1, 2, 3, 5] &rarr; [0, 1, 1, 2, 3, 5, 8]</span>
+</div> = [0, 1, 1, 2, 3, 5] &rarr; [0, 1, 1, 2, 3, 5, 8]</div> <br>
+</div class = "temp">
+<div id="ms0" class="mySlides">
+<div class = "div_line_num">47</div> <div class = "div_code_text">    for i in <div class="tooltip">range
+<span class="tooltiptext">range(stop) -> range object
+range(start, stop[, step]) -> range object
+
+Return an object that produces a sequence of integers from start (inclusive)
+to stop (exclusive) by step.  range(i, j) produces i, i+1, i+2, ..., j-1.
+start defaults to 0, and stop is omitted!  range(4) produces 0, 1, 2, 3.
+These are exactly the valid indices for a list of 4 elements.
+When step is given, it specifies the increment (or decrement).</span>
+</div>(2, n+1):
+</div> <br>
+<div class = "div_var_mod"><div class="tooltip">i
+<span class="tooltiptext">2 &rarr; 3 &rarr; 4 &rarr; 5 &rarr; 6 &rarr; 7</span>
+</div> = 6 &rarr; 7</div> <br>
+<div class = "div_line_num">48</div> <div class = "div_code_text">        <div class="tooltip">f
+<span class="tooltiptext">Built-in mutable sequence.
+
+If no argument is given, the constructor creates a new empty list.
+The argument must be an iterable if specified.</span>
+</div><div class="tooltip">.append
+<span class="tooltiptext">Append object to the end of the list.</span>
+</div>(f[i-1] + f[i-2])
+</div> <br>
+<div class = "div_var_mod"><div class="tooltip">f
+<span class="tooltiptext">[0, 1] &rarr; [0, 1, 1] &rarr; [0, 1, 1, 2] &rarr; [0, 1, 1, 2, 3] &rarr; [0, 1, 1, 2, 3, 5] &rarr; [0, 1, 1, 2, 3, 5, 8] &rarr; [0, 1, 1, 2, 3, 5, 8, 13]</span>
+</div> = [0, 1, 1, 2, 3, 5, 8] &rarr; [0, 1, 1, 2, 3, 5, 8, 13]</div> <br>
+</div class = "temp">
+<div id="ms0" class="mySlides">
+<div class = "div_line_num">47</div> <div class = "div_code_text">    for i in <div class="tooltip">range
+<span class="tooltiptext">range(stop) -> range object
+range(start, stop[, step]) -> range object
+
+Return an object that produces a sequence of integers from start (inclusive)
+to stop (exclusive) by step.  range(i, j) produces i, i+1, i+2, ..., j-1.
+start defaults to 0, and stop is omitted!  range(4) produces 0, 1, 2, 3.
+These are exactly the valid indices for a list of 4 elements.
+When step is given, it specifies the increment (or decrement).</span>
+</div>(2, n+1):
+</div> <br>
+<div class = "div_var_mod"><div class="tooltip">i
+<span class="tooltiptext">2 &rarr; 3 &rarr; 4 &rarr; 5 &rarr; 6 &rarr; 7 &rarr; 8</span>
+</div> = 7 &rarr; 8</div> <br>
+<div class = "div_line_num">48</div> <div class = "div_code_text">        <div class="tooltip">f
+<span class="tooltiptext">Built-in mutable sequence.
+
+If no argument is given, the constructor creates a new empty list.
+The argument must be an iterable if specified.</span>
+</div><div class="tooltip">.append
+<span class="tooltiptext">Append object to the end of the list.</span>
+</div>(f[i-1] + f[i-2])
+</div> <br>
+<div class = "div_var_mod"><div class="tooltip">f
+<span class="tooltiptext">[0, 1] &rarr; [0, 1, 1] &rarr; [0, 1, 1, 2] &rarr; [0, 1, 1, 2, 3] &rarr; [0, 1, 1, 2, 3, 5] &rarr; [0, 1, 1, 2, 3, 5, 8] &rarr; [0, 1, 1, 2, 3, 5, 8, 13] &rarr; [0, 1, 1, 2, 3, 5, 8, 13, 21]</span>
+</div> = [0, 1, 1, 2, 3, 5, 8, 13] &rarr; [0, 1, 1, 2, 3, 5, 8, 13, 21]</div> <br>
+</div class = "temp">
+<div id="ms0" class="mySlides">
+<div class = "div_line_num">47</div> <div class = "div_code_text">    for i in <div class="tooltip">range
+<span class="tooltiptext">range(stop) -> range object
+range(start, stop[, step]) -> range object
+
+Return an object that produces a sequence of integers from start (inclusive)
+to stop (exclusive) by step.  range(i, j) produces i, i+1, i+2, ..., j-1.
+start defaults to 0, and stop is omitted!  range(4) produces 0, 1, 2, 3.
+These are exactly the valid indices for a list of 4 elements.
+When step is given, it specifies the increment (or decrement).</span>
+</div>(2, n+1):
+</div> <br>
+<div class = "div_var_mod"><div class="tooltip">i
+<span class="tooltiptext">2 &rarr; 3 &rarr; 4 &rarr; 5 &rarr; 6 &rarr; 7 &rarr; 8 &rarr; 9</span>
+</div> = 8 &rarr; 9</div> <br>
+<div class = "div_line_num">48</div> <div class = "div_code_text">        <div class="tooltip">f
+<span class="tooltiptext">Built-in mutable sequence.
+
+If no argument is given, the constructor creates a new empty list.
+The argument must be an iterable if specified.</span>
+</div><div class="tooltip">.append
+<span class="tooltiptext">Append object to the end of the list.</span>
+</div>(f[i-1] + f[i-2])
+</div> <br>
+<div class = "div_var_mod"><div class="tooltip">f
+<span class="tooltiptext">[0, 1] &rarr; [0, 1, 1] &rarr; [0, 1, 1, 2] &rarr; [0, 1, 1, 2, 3] &rarr; [0, 1, 1, 2, 3, 5] &rarr; [0, 1, 1, 2, 3, 5, 8] &rarr; [0, 1, 1, 2, 3, 5, 8, 13] &rarr; [0, 1, 1, 2, 3, 5, 8, 13, 21] &rarr; [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]</span>
+</div> = [0, 1, 1, 2, 3, 5, 8, 13, 21] &rarr; [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]</div> <br>
+</div class = "temp">
+<div id="ms0" class="mySlides">
+<div class = "div_line_num">47</div> <div class = "div_code_text">    for i in <div class="tooltip">range
+<span class="tooltiptext">range(stop) -> range object
+range(start, stop[, step]) -> range object
+
+Return an object that produces a sequence of integers from start (inclusive)
+to stop (exclusive) by step.  range(i, j) produces i, i+1, i+2, ..., j-1.
+start defaults to 0, and stop is omitted!  range(4) produces 0, 1, 2, 3.
+These are exactly the valid indices for a list of 4 elements.
+When step is given, it specifies the increment (or decrement).</span>
+</div>(2, n+1):
+</div> <br>
+<div class = "div_var_mod"><div class="tooltip">i
+<span class="tooltiptext">2 &rarr; 3 &rarr; 4 &rarr; 5 &rarr; 6 &rarr; 7 &rarr; 8 &rarr; 9 &rarr; 10</span>
+</div> = 9 &rarr; 10</div> <br>
+<div class = "div_line_num">48</div> <div class = "div_code_text">        <div class="tooltip">f
+<span class="tooltiptext">Built-in mutable sequence.
+
+If no argument is given, the constructor creates a new empty list.
+The argument must be an iterable if specified.</span>
+</div><div class="tooltip">.append
+<span class="tooltiptext">Append object to the end of the list.</span>
+</div>(f[i-1] + f[i-2])
+</div> <br>
+<div class = "div_var_mod"><div class="tooltip">f
+<span class="tooltiptext">[0, 1] &rarr; [0, 1, 1] &rarr; [0, 1, 1, 2] &rarr; [0, 1, 1, 2, 3] &rarr; [0, 1, 1, 2, 3, 5] &rarr; [0, 1, 1, 2, 3, 5, 8] &rarr; [0, 1, 1, 2, 3, 5, 8, 13] &rarr; [0, 1, 1, 2, 3, 5, 8, 13, 21] &rarr; [0, 1, 1, 2, 3, 5, 8, 13, 21, 34] &rarr; [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55]</span>
+</div> = [0, 1, 1, 2, 3, 5, 8, 13, 21, 34] &rarr; [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55]</div> <br>
+</div class = "temp">
+<div id="ms0" class="mySlides">
+<div class = "div_line_num">47</div> <div class = "div_code_text">    for i in <div class="tooltip">range
+<span class="tooltiptext">range(stop) -> range object
+range(start, stop[, step]) -> range object
+
+Return an object that produces a sequence of integers from start (inclusive)
+to stop (exclusive) by step.  range(i, j) produces i, i+1, i+2, ..., j-1.
+start defaults to 0, and stop is omitted!  range(4) produces 0, 1, 2, 3.
+These are exactly the valid indices for a list of 4 elements.
+When step is given, it specifies the increment (or decrement).</span>
+</div>(2, n+1):
+</div> <br>
 </div class = "temp">
 <a class="prev" onclick="plusSlides(-1,0)">&#10094;</a>
             <a class="next" onclick="plusSlides(1,0)">&#10095;</a>
             </div>
-<div id = "ss1" class="slideshow-container">
-<div id="ms1" class="mySlides">
-<div class = "div_line_num">64</div> <div class = "div_code_text">    if <div class="tooltip">any
-<span class="tooltiptext">Return True if bool(x) is True for any x in the iterable.
-
-If the iterable is empty, return False.</span>
-</div>(w < 0 for w in weight):
-</div> <br>
-<div class = "div_var_intro">False</div><br>
-</div class = "temp">
-<a class="prev" onclick="plusSlides(-1,1)">&#10094;</a>
-            <a class="next" onclick="plusSlides(1,1)">&#10095;</a>
-            </div>
-<div id = "ss2" class="slideshow-container">
-<div id="ms2" class="mySlides">
-<div class = "div_line_num">69</div> <div class = "div_code_text">    profit_by_weight = [p / w for p, w in <div class="tooltip">zip
-<span class="tooltiptext">zip(*iterables, strict=False) --> Yield tuples until an input is exhausted.
-
-   >>> list(zip('abcdefg', range(3), range(4)))
-   [('a', 0, 0), ('b', 1, 1), ('c', 2, 2)]
-
-The zip object yields n-length tuples, where n is the number of iterables
-passed as positional arguments to zip().  The i-th element in every tuple
-comes from the i-th iterable argument to zip().  This continues until the
-shortest argument is exhausted.
-
-If strict is true and one of the arguments is exhausted before the others,
-raise a ValueError.</span>
-</div>(profit, weight)]
-</div> <br>
-<div class = "div_var_intro">p = 5 is introduced.</div> <br>
-<div class = "div_var_intro">w = 2 is introduced.</div> <br>
-</div class = "temp">
-<div id="ms2" class="mySlides">
-<div class = "div_line_num">69</div> <div class = "div_code_text">    profit_by_weight = [p / w for p, w in <div class="tooltip">zip
-<span class="tooltiptext">zip(*iterables, strict=False) --> Yield tuples until an input is exhausted.
-
-   >>> list(zip('abcdefg', range(3), range(4)))
-   [('a', 0, 0), ('b', 1, 1), ('c', 2, 2)]
-
-The zip object yields n-length tuples, where n is the number of iterables
-passed as positional arguments to zip().  The i-th element in every tuple
-comes from the i-th iterable argument to zip().  This continues until the
-shortest argument is exhausted.
-
-If strict is true and one of the arguments is exhausted before the others,
-raise a ValueError.</span>
-</div>(profit, weight)]
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">p
-<span class="tooltiptext">5 &rarr; 8</span>
-</div> = 5 &rarr; 8</div> <br>
-<div class = "div_var_mod"><div class="tooltip">w
-<span class="tooltiptext">2 &rarr; 7</span>
-</div> = 2 &rarr; 7</div> <br>
-</div class = "temp">
-<div id="ms2" class="mySlides">
-<div class = "div_line_num">69</div> <div class = "div_code_text">    profit_by_weight = [p / w for p, w in <div class="tooltip">zip
-<span class="tooltiptext">zip(*iterables, strict=False) --> Yield tuples until an input is exhausted.
-
-   >>> list(zip('abcdefg', range(3), range(4)))
-   [('a', 0, 0), ('b', 1, 1), ('c', 2, 2)]
-
-The zip object yields n-length tuples, where n is the number of iterables
-passed as positional arguments to zip().  The i-th element in every tuple
-comes from the i-th iterable argument to zip().  This continues until the
-shortest argument is exhausted.
-
-If strict is true and one of the arguments is exhausted before the others,
-raise a ValueError.</span>
-</div>(profit, weight)]
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">p
-<span class="tooltiptext">5 &rarr; 8 &rarr; 7</span>
-</div> = 8 &rarr; 7</div> <br>
-<div class = "div_var_mod"><div class="tooltip">w
-<span class="tooltiptext">2 &rarr; 7 &rarr; 1</span>
-</div> = 7 &rarr; 1</div> <br>
-</div class = "temp">
-<div id="ms2" class="mySlides">
-<div class = "div_line_num">69</div> <div class = "div_code_text">    profit_by_weight = [p / w for p, w in <div class="tooltip">zip
-<span class="tooltiptext">zip(*iterables, strict=False) --> Yield tuples until an input is exhausted.
-
-   >>> list(zip('abcdefg', range(3), range(4)))
-   [('a', 0, 0), ('b', 1, 1), ('c', 2, 2)]
-
-The zip object yields n-length tuples, where n is the number of iterables
-passed as positional arguments to zip().  The i-th element in every tuple
-comes from the i-th iterable argument to zip().  This continues until the
-shortest argument is exhausted.
-
-If strict is true and one of the arguments is exhausted before the others,
-raise a ValueError.</span>
-</div>(profit, weight)]
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">p
-<span class="tooltiptext">5 &rarr; 8 &rarr; 7 &rarr; 1</span>
-</div> = 7 &rarr; 1</div> <br>
-<div class = "div_var_mod"><div class="tooltip">w
-<span class="tooltiptext">2 &rarr; 7 &rarr; 1 &rarr; 6</span>
-</div> = 1 &rarr; 6</div> <br>
-</div class = "temp">
-<div id="ms2" class="mySlides">
-<div class = "div_line_num">69</div> <div class = "div_code_text">    profit_by_weight = [p / w for p, w in <div class="tooltip">zip
-<span class="tooltiptext">zip(*iterables, strict=False) --> Yield tuples until an input is exhausted.
-
-   >>> list(zip('abcdefg', range(3), range(4)))
-   [('a', 0, 0), ('b', 1, 1), ('c', 2, 2)]
-
-The zip object yields n-length tuples, where n is the number of iterables
-passed as positional arguments to zip().  The i-th element in every tuple
-comes from the i-th iterable argument to zip().  This continues until the
-shortest argument is exhausted.
-
-If strict is true and one of the arguments is exhausted before the others,
-raise a ValueError.</span>
-</div>(profit, weight)]
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">p
-<span class="tooltiptext">5 &rarr; 8 &rarr; 7 &rarr; 1 &rarr; 12</span>
-</div> = 1 &rarr; 12</div> <br>
-<div class = "div_var_mod"><div class="tooltip">w
-<span class="tooltiptext">2 &rarr; 7 &rarr; 1 &rarr; 6 &rarr; 4</span>
-</div> = 6 &rarr; 4</div> <br>
-</div class = "temp">
-<div id="ms2" class="mySlides">
-<div class = "div_line_num">69</div> <div class = "div_code_text">    profit_by_weight = [p / w for p, w in <div class="tooltip">zip
-<span class="tooltiptext">zip(*iterables, strict=False) --> Yield tuples until an input is exhausted.
-
-   >>> list(zip('abcdefg', range(3), range(4)))
-   [('a', 0, 0), ('b', 1, 1), ('c', 2, 2)]
-
-The zip object yields n-length tuples, where n is the number of iterables
-passed as positional arguments to zip().  The i-th element in every tuple
-comes from the i-th iterable argument to zip().  This continues until the
-shortest argument is exhausted.
-
-If strict is true and one of the arguments is exhausted before the others,
-raise a ValueError.</span>
-</div>(profit, weight)]
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">p
-<span class="tooltiptext">5 &rarr; 8 &rarr; 7 &rarr; 1 &rarr; 12 &rarr; 3</span>
-</div> = 12 &rarr; 3</div> <br>
-<div class = "div_var_mod"><div class="tooltip">w
-<span class="tooltiptext">2 &rarr; 7 &rarr; 1 &rarr; 6 &rarr; 4 &rarr; 2</span>
-</div> = 4 &rarr; 2</div> <br>
-</div class = "temp">
-<div id="ms2" class="mySlides">
-<div class = "div_line_num">69</div> <div class = "div_code_text">    profit_by_weight = [p / w for p, w in <div class="tooltip">zip
-<span class="tooltiptext">zip(*iterables, strict=False) --> Yield tuples until an input is exhausted.
-
-   >>> list(zip('abcdefg', range(3), range(4)))
-   [('a', 0, 0), ('b', 1, 1), ('c', 2, 2)]
-
-The zip object yields n-length tuples, where n is the number of iterables
-passed as positional arguments to zip().  The i-th element in every tuple
-comes from the i-th iterable argument to zip().  This continues until the
-shortest argument is exhausted.
-
-If strict is true and one of the arguments is exhausted before the others,
-raise a ValueError.</span>
-</div>(profit, weight)]
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">p
-<span class="tooltiptext">5 &rarr; 8 &rarr; 7 &rarr; 1 &rarr; 12 &rarr; 3 &rarr; 4</span>
-</div> = 3 &rarr; 4</div> <br>
-<div class = "div_var_mod"><div class="tooltip">w
-<span class="tooltiptext">2 &rarr; 7 &rarr; 1 &rarr; 6 &rarr; 4 &rarr; 2 &rarr; 5</span>
-</div> = 2 &rarr; 5</div> <br>
-</div class = "temp">
-<div id="ms2" class="mySlides">
-<div class = "div_line_num">69</div> <div class = "div_code_text">    profit_by_weight = [p / w for p, w in <div class="tooltip">zip
-<span class="tooltiptext">zip(*iterables, strict=False) --> Yield tuples until an input is exhausted.
-
-   >>> list(zip('abcdefg', range(3), range(4)))
-   [('a', 0, 0), ('b', 1, 1), ('c', 2, 2)]
-
-The zip object yields n-length tuples, where n is the number of iterables
-passed as positional arguments to zip().  The i-th element in every tuple
-comes from the i-th iterable argument to zip().  This continues until the
-shortest argument is exhausted.
-
-If strict is true and one of the arguments is exhausted before the others,
-raise a ValueError.</span>
-</div>(profit, weight)]
-</div> <br>
-<div class = "div_var_intro">profit_by_weight = [2.5, 1.1428571428571428, 7.0, 0.16666666666666666, 3.0, 1.5, 0.8] is introduced.</div> <br>
-</div class = "temp">
-<a class="prev" onclick="plusSlides(-1,2)">&#10094;</a>
-            <a class="next" onclick="plusSlides(1,2)">&#10095;</a>
-            </div>
-<div class = "div_line_num">72</div> <div class = "div_code_text">    sorted_profit_by_weight = <div class="tooltip">sorted
-<span class="tooltiptext">Return a new list containing all items from the iterable in ascending order.
-
-A custom key function can be supplied to customize the sort order, and the
-reverse flag can be set to request the result in descending order.</span>
-</div>(profit_by_weight)
-</div> <br>
-<div class = "div_var_intro">sorted_profit_by_weight = [0.16666666666666666, 0.8, 1.1428571428571428, 1.5, 2.5, 3.0, 7.0] is introduced.</div> <br>
-<div class = "div_line_num">75</div> <div class = "div_code_text">    length = <div class="tooltip">len
-<span class="tooltiptext">Return the number of items in a container.</span>
-</div>(sorted_profit_by_weight)
-</div> <br>
-<div class = "div_var_intro">length = 7 is introduced.</div> <br>
-<div class = "div_line_num">76</div> <div class = "div_code_text">    limit = 0
-</div> <br>
-<div class = "div_line_num">77</div> <div class = "div_code_text">    gain = 0
-</div> <br>
-<div class = "div_line_num">78</div> <div class = "div_code_text">    i = 0
-</div> <br>
-<div class = "div_line_num">79</div> <div class = "div_code_text">    test = []
-</div> <br>
-<div id = "ss3" class="slideshow-container">
-<div id="ms3" class="mySlides">
-<div class = "div_line_num">82</div> <div class = "div_code_text">    while limit <= max_weight and i < length:
-</div> <br>
-<div class = "div_line_num">84</div> <div class = "div_code_text">        biggest_profit_by_weight = sorted_profit_by_weight[length - i - 1]
-</div> <br>
-<div class = "div_var_intro">biggest_profit_by_weight = 7.0 is introduced.</div> <br>
-<div class = "div_line_num">85</div> <div class = "div_code_text">        """
-</div> <br>
-<div class = "div_line_num">93</div> <div class = "div_code_text">        index = <div class="tooltip">profit_by_weight
-<span class="tooltiptext">Built-in mutable sequence.
-
-If no argument is given, the constructor creates a new empty list.
-The argument must be an iterable if specified.</span>
-</div><div class="tooltip">.index
-<span class="tooltiptext">Return first index of value.
-
-Raises ValueError if the value is not present.</span>
-</div>(biggest_profit_by_weight)
-</div> <br>
-<div class = "div_var_intro">index = 2 is introduced.</div> <br>
-<div class = "div_line_num">94</div> <div class = "div_code_text">        profit_by_weight[index] = -1
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">profit_by_weight
-<span class="tooltiptext">[2.5, 1.1428571428571428, 7.0, 0.16666666666666666, 3.0, 1.5, 0.8] &rarr; [2.5, 1.1428571428571428, -1, 0.16666666666666666, 3.0, 1.5, 0.8]</span>
-</div> = [2.5, 1.1428571428571428, 7.0, 0.16666666666666666, 3.0, 1.5, 0.8] &rarr; [2.5, 1.1428571428571428, -1, 0.16666666666666666, 3.0, 1.5, 0.8]</div> <br>
-<div class = "div_line_num">98</div> <div class = "div_code_text">        if max_weight - limit >= weight[index]:
-</div> <br>
-<div class = "div_var_intro">True</div><br>
-<div class = "div_line_num">99</div> <div class = "div_code_text">            limit += weight[index]
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">limit
-<span class="tooltiptext">0 &rarr; 1</span>
-</div> = 0 &rarr; 1</div> <br>
-<div class = "div_line_num">102</div> <div class = "div_code_text">            gain += 1 * profit[index]
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">gain
-<span class="tooltiptext">0 &rarr; 7</span>
-</div> = 0 &rarr; 7</div> <br>
-<div class = "div_line_num">109</div> <div class = "div_code_text">        i += 1
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">i
-<span class="tooltiptext">0 &rarr; 1</span>
-</div> = 0 &rarr; 1</div> <br>
-</div class = "temp">
-<div id="ms3" class="mySlides">
-<div class = "div_line_num">82</div> <div class = "div_code_text">    while limit <= max_weight and i < length:
-</div> <br>
-<div class = "div_line_num">84</div> <div class = "div_code_text">        biggest_profit_by_weight = sorted_profit_by_weight[length - i - 1]
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">biggest_profit_by_weight
-<span class="tooltiptext">7.0 &rarr; 3.0</span>
-</div> = 7.0 &rarr; 3.0</div> <br>
-<div class = "div_line_num">85</div> <div class = "div_code_text">        """
-</div> <br>
-<div class = "div_line_num">93</div> <div class = "div_code_text">        index = <div class="tooltip">profit_by_weight
-<span class="tooltiptext">Built-in mutable sequence.
-
-If no argument is given, the constructor creates a new empty list.
-The argument must be an iterable if specified.</span>
-</div><div class="tooltip">.index
-<span class="tooltiptext">Return first index of value.
-
-Raises ValueError if the value is not present.</span>
-</div>(biggest_profit_by_weight)
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">index
-<span class="tooltiptext">2 &rarr; 4</span>
-</div> = 2 &rarr; 4</div> <br>
-<div class = "div_line_num">94</div> <div class = "div_code_text">        profit_by_weight[index] = -1
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">profit_by_weight
-<span class="tooltiptext">[2.5, 1.1428571428571428, 7.0, 0.16666666666666666, 3.0, 1.5, 0.8] &rarr; [2.5, 1.1428571428571428, -1, 0.16666666666666666, 3.0, 1.5, 0.8] &rarr; [2.5, 1.1428571428571428, -1, 0.16666666666666666, -1, 1.5, 0.8]</span>
-</div> = [2.5, 1.1428571428571428, -1, 0.16666666666666666, 3.0, 1.5, 0.8] &rarr; [2.5, 1.1428571428571428, -1, 0.16666666666666666, -1, 1.5, 0.8]</div> <br>
-<div class = "div_line_num">98</div> <div class = "div_code_text">        if max_weight - limit >= weight[index]:
-</div> <br>
-<div class = "div_var_intro">True</div><br>
-<div class = "div_line_num">99</div> <div class = "div_code_text">            limit += weight[index]
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">limit
-<span class="tooltiptext">0 &rarr; 1 &rarr; 5</span>
-</div> = 1 &rarr; 5</div> <br>
-<div class = "div_line_num">102</div> <div class = "div_code_text">            gain += 1 * profit[index]
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">gain
-<span class="tooltiptext">0 &rarr; 7 &rarr; 19</span>
-</div> = 7 &rarr; 19</div> <br>
-<div class = "div_line_num">109</div> <div class = "div_code_text">        i += 1
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">i
-<span class="tooltiptext">0 &rarr; 1 &rarr; 2</span>
-</div> = 1 &rarr; 2</div> <br>
-</div class = "temp">
-<div id="ms3" class="mySlides">
-<div class = "div_line_num">82</div> <div class = "div_code_text">    while limit <= max_weight and i < length:
-</div> <br>
-<div class = "div_line_num">84</div> <div class = "div_code_text">        biggest_profit_by_weight = sorted_profit_by_weight[length - i - 1]
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">biggest_profit_by_weight
-<span class="tooltiptext">7.0 &rarr; 3.0 &rarr; 2.5</span>
-</div> = 3.0 &rarr; 2.5</div> <br>
-<div class = "div_line_num">85</div> <div class = "div_code_text">        """
-</div> <br>
-<div class = "div_line_num">93</div> <div class = "div_code_text">        index = <div class="tooltip">profit_by_weight
-<span class="tooltiptext">Built-in mutable sequence.
-
-If no argument is given, the constructor creates a new empty list.
-The argument must be an iterable if specified.</span>
-</div><div class="tooltip">.index
-<span class="tooltiptext">Return first index of value.
-
-Raises ValueError if the value is not present.</span>
-</div>(biggest_profit_by_weight)
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">index
-<span class="tooltiptext">2 &rarr; 4 &rarr; 0</span>
-</div> = 4 &rarr; 0</div> <br>
-<div class = "div_line_num">94</div> <div class = "div_code_text">        profit_by_weight[index] = -1
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">profit_by_weight
-<span class="tooltiptext">[2.5, 1.1428571428571428, 7.0, 0.16666666666666666, 3.0, 1.5, 0.8] &rarr; [2.5, 1.1428571428571428, -1, 0.16666666666666666, 3.0, 1.5, 0.8] &rarr; [2.5, 1.1428571428571428, -1, 0.16666666666666666, -1, 1.5, 0.8] &rarr; [-1, 1.1428571428571428, -1, 0.16666666666666666, -1, 1.5, 0.8]</span>
-</div> = [2.5, 1.1428571428571428, -1, 0.16666666666666666, -1, 1.5, 0.8] &rarr; [-1, 1.1428571428571428, -1, 0.16666666666666666, -1, 1.5, 0.8]</div> <br>
-<div class = "div_line_num">98</div> <div class = "div_code_text">        if max_weight - limit >= weight[index]:
-</div> <br>
-<div class = "div_var_intro">True</div><br>
-<div class = "div_line_num">99</div> <div class = "div_code_text">            limit += weight[index]
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">limit
-<span class="tooltiptext">0 &rarr; 1 &rarr; 5 &rarr; 7</span>
-</div> = 5 &rarr; 7</div> <br>
-<div class = "div_line_num">102</div> <div class = "div_code_text">            gain += 1 * profit[index]
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">gain
-<span class="tooltiptext">0 &rarr; 7 &rarr; 19 &rarr; 24</span>
-</div> = 19 &rarr; 24</div> <br>
-<div class = "div_line_num">109</div> <div class = "div_code_text">        i += 1
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">i
-<span class="tooltiptext">0 &rarr; 1 &rarr; 2 &rarr; 3</span>
-</div> = 2 &rarr; 3</div> <br>
-</div class = "temp">
-<div id="ms3" class="mySlides">
-<div class = "div_line_num">82</div> <div class = "div_code_text">    while limit <= max_weight and i < length:
-</div> <br>
-<div class = "div_line_num">84</div> <div class = "div_code_text">        biggest_profit_by_weight = sorted_profit_by_weight[length - i - 1]
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">biggest_profit_by_weight
-<span class="tooltiptext">7.0 &rarr; 3.0 &rarr; 2.5 &rarr; 1.5</span>
-</div> = 2.5 &rarr; 1.5</div> <br>
-<div class = "div_line_num">85</div> <div class = "div_code_text">        """
-</div> <br>
-<div class = "div_line_num">93</div> <div class = "div_code_text">        index = <div class="tooltip">profit_by_weight
-<span class="tooltiptext">Built-in mutable sequence.
-
-If no argument is given, the constructor creates a new empty list.
-The argument must be an iterable if specified.</span>
-</div><div class="tooltip">.index
-<span class="tooltiptext">Return first index of value.
-
-Raises ValueError if the value is not present.</span>
-</div>(biggest_profit_by_weight)
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">index
-<span class="tooltiptext">2 &rarr; 4 &rarr; 0 &rarr; 5</span>
-</div> = 0 &rarr; 5</div> <br>
-<div class = "div_line_num">94</div> <div class = "div_code_text">        profit_by_weight[index] = -1
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">profit_by_weight
-<span class="tooltiptext">[2.5, 1.1428571428571428, 7.0, 0.16666666666666666, 3.0, 1.5, 0.8] &rarr; [2.5, 1.1428571428571428, -1, 0.16666666666666666, 3.0, 1.5, 0.8] &rarr; [2.5, 1.1428571428571428, -1, 0.16666666666666666, -1, 1.5, 0.8] &rarr; [-1, 1.1428571428571428, -1, 0.16666666666666666, -1, 1.5, 0.8] &rarr; [-1, 1.1428571428571428, -1, 0.16666666666666666, -1, -1, 0.8]</span>
-</div> = [-1, 1.1428571428571428, -1, 0.16666666666666666, -1, 1.5, 0.8] &rarr; [-1, 1.1428571428571428, -1, 0.16666666666666666, -1, -1, 0.8]</div> <br>
-<div class = "div_line_num">98</div> <div class = "div_code_text">        if max_weight - limit >= weight[index]:
-</div> <br>
-<div class = "div_var_intro">True</div><br>
-<div class = "div_line_num">99</div> <div class = "div_code_text">            limit += weight[index]
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">limit
-<span class="tooltiptext">0 &rarr; 1 &rarr; 5 &rarr; 7 &rarr; 9</span>
-</div> = 7 &rarr; 9</div> <br>
-<div class = "div_line_num">102</div> <div class = "div_code_text">            gain += 1 * profit[index]
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">gain
-<span class="tooltiptext">0 &rarr; 7 &rarr; 19 &rarr; 24 &rarr; 27</span>
-</div> = 24 &rarr; 27</div> <br>
-<div class = "div_line_num">109</div> <div class = "div_code_text">        i += 1
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">i
-<span class="tooltiptext">0 &rarr; 1 &rarr; 2 &rarr; 3 &rarr; 4</span>
-</div> = 3 &rarr; 4</div> <br>
-</div class = "temp">
-<div id="ms3" class="mySlides">
-<div class = "div_line_num">82</div> <div class = "div_code_text">    while limit <= max_weight and i < length:
-</div> <br>
-<div class = "div_line_num">84</div> <div class = "div_code_text">        biggest_profit_by_weight = sorted_profit_by_weight[length - i - 1]
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">biggest_profit_by_weight
-<span class="tooltiptext">7.0 &rarr; 3.0 &rarr; 2.5 &rarr; 1.5 &rarr; 1.1428571428571428</span>
-</div> = 1.5 &rarr; 1.1428571428571428</div> <br>
-<div class = "div_line_num">85</div> <div class = "div_code_text">        """
-</div> <br>
-<div class = "div_line_num">93</div> <div class = "div_code_text">        index = <div class="tooltip">profit_by_weight
-<span class="tooltiptext">Built-in mutable sequence.
-
-If no argument is given, the constructor creates a new empty list.
-The argument must be an iterable if specified.</span>
-</div><div class="tooltip">.index
-<span class="tooltiptext">Return first index of value.
-
-Raises ValueError if the value is not present.</span>
-</div>(biggest_profit_by_weight)
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">index
-<span class="tooltiptext">2 &rarr; 4 &rarr; 0 &rarr; 5 &rarr; 1</span>
-</div> = 5 &rarr; 1</div> <br>
-<div class = "div_line_num">94</div> <div class = "div_code_text">        profit_by_weight[index] = -1
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">profit_by_weight
-<span class="tooltiptext">[2.5, 1.1428571428571428, 7.0, 0.16666666666666666, 3.0, 1.5, 0.8] &rarr; [2.5, 1.1428571428571428, -1, 0.16666666666666666, 3.0, 1.5, 0.8] &rarr; [2.5, 1.1428571428571428, -1, 0.16666666666666666, -1, 1.5, 0.8] &rarr; [-1, 1.1428571428571428, -1, 0.16666666666666666, -1, 1.5, 0.8] &rarr; [-1, 1.1428571428571428, -1, 0.16666666666666666, -1, -1, 0.8] &rarr; [-1, -1, -1, 0.16666666666666666, -1, -1, 0.8]</span>
-</div> = [-1, 1.1428571428571428, -1, 0.16666666666666666, -1, -1, 0.8] &rarr; [-1, -1, -1, 0.16666666666666666, -1, -1, 0.8]</div> <br>
-<div class = "div_line_num">98</div> <div class = "div_code_text">        if max_weight - limit >= weight[index]:
-</div> <br>
-<div class = "div_var_intro">True</div><br>
-<div class = "div_line_num">99</div> <div class = "div_code_text">            limit += weight[index]
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">limit
-<span class="tooltiptext">0 &rarr; 1 &rarr; 5 &rarr; 7 &rarr; 9 &rarr; 16</span>
-</div> = 9 &rarr; 16</div> <br>
-<div class = "div_line_num">102</div> <div class = "div_code_text">            gain += 1 * profit[index]
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">gain
-<span class="tooltiptext">0 &rarr; 7 &rarr; 19 &rarr; 24 &rarr; 27 &rarr; 35</span>
-</div> = 27 &rarr; 35</div> <br>
-<div class = "div_line_num">109</div> <div class = "div_code_text">        i += 1
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">i
-<span class="tooltiptext">0 &rarr; 1 &rarr; 2 &rarr; 3 &rarr; 4 &rarr; 5</span>
-</div> = 4 &rarr; 5</div> <br>
-</div class = "temp">
-<div id="ms3" class="mySlides">
-<div class = "div_line_num">82</div> <div class = "div_code_text">    while limit <= max_weight and i < length:
-</div> <br>
-<div class = "div_line_num">84</div> <div class = "div_code_text">        biggest_profit_by_weight = sorted_profit_by_weight[length - i - 1]
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">biggest_profit_by_weight
-<span class="tooltiptext">7.0 &rarr; 3.0 &rarr; 2.5 &rarr; 1.5 &rarr; 1.1428571428571428 &rarr; 0.8</span>
-</div> = 1.1428571428571428 &rarr; 0.8</div> <br>
-<div class = "div_line_num">85</div> <div class = "div_code_text">        """
-</div> <br>
-<div class = "div_line_num">93</div> <div class = "div_code_text">        index = <div class="tooltip">profit_by_weight
-<span class="tooltiptext">Built-in mutable sequence.
-
-If no argument is given, the constructor creates a new empty list.
-The argument must be an iterable if specified.</span>
-</div><div class="tooltip">.index
-<span class="tooltiptext">Return first index of value.
-
-Raises ValueError if the value is not present.</span>
-</div>(biggest_profit_by_weight)
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">index
-<span class="tooltiptext">2 &rarr; 4 &rarr; 0 &rarr; 5 &rarr; 1 &rarr; 6</span>
-</div> = 1 &rarr; 6</div> <br>
-<div class = "div_line_num">94</div> <div class = "div_code_text">        profit_by_weight[index] = -1
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">profit_by_weight
-<span class="tooltiptext">[2.5, 1.1428571428571428, 7.0, 0.16666666666666666, 3.0, 1.5, 0.8] &rarr; [2.5, 1.1428571428571428, -1, 0.16666666666666666, 3.0, 1.5, 0.8] &rarr; [2.5, 1.1428571428571428, -1, 0.16666666666666666, -1, 1.5, 0.8] &rarr; [-1, 1.1428571428571428, -1, 0.16666666666666666, -1, 1.5, 0.8] &rarr; [-1, 1.1428571428571428, -1, 0.16666666666666666, -1, -1, 0.8] &rarr; [-1, -1, -1, 0.16666666666666666, -1, -1, 0.8] &rarr; [-1, -1, -1, 0.16666666666666666, -1, -1, -1]</span>
-</div> = [-1, -1, -1, 0.16666666666666666, -1, -1, 0.8] &rarr; [-1, -1, -1, 0.16666666666666666, -1, -1, -1]</div> <br>
-<div class = "div_line_num">98</div> <div class = "div_code_text">        if max_weight - limit >= weight[index]:
-</div> <br>
-<div class = "div_var_intro">True</div><br>
-<div class = "div_line_num">99</div> <div class = "div_code_text">            limit += weight[index]
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">limit
-<span class="tooltiptext">0 &rarr; 1 &rarr; 5 &rarr; 7 &rarr; 9 &rarr; 16 &rarr; 21</span>
-</div> = 16 &rarr; 21</div> <br>
-<div class = "div_line_num">102</div> <div class = "div_code_text">            gain += 1 * profit[index]
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">gain
-<span class="tooltiptext">0 &rarr; 7 &rarr; 19 &rarr; 24 &rarr; 27 &rarr; 35 &rarr; 39</span>
-</div> = 35 &rarr; 39</div> <br>
-<div class = "div_line_num">109</div> <div class = "div_code_text">        i += 1
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">i
-<span class="tooltiptext">0 &rarr; 1 &rarr; 2 &rarr; 3 &rarr; 4 &rarr; 5 &rarr; 6</span>
-</div> = 5 &rarr; 6</div> <br>
-</div class = "temp">
-<div id="ms3" class="mySlides">
-<div class = "div_line_num">82</div> <div class = "div_code_text">    while limit <= max_weight and i < length:
-</div> <br>
-<div class = "div_line_num">84</div> <div class = "div_code_text">        biggest_profit_by_weight = sorted_profit_by_weight[length - i - 1]
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">biggest_profit_by_weight
-<span class="tooltiptext">7.0 &rarr; 3.0 &rarr; 2.5 &rarr; 1.5 &rarr; 1.1428571428571428 &rarr; 0.8 &rarr; 0.16666666666666666</span>
-</div> = 0.8 &rarr; 0.16666666666666666</div> <br>
-<div class = "div_line_num">85</div> <div class = "div_code_text">        """
-</div> <br>
-<div class = "div_line_num">93</div> <div class = "div_code_text">        index = <div class="tooltip">profit_by_weight
-<span class="tooltiptext">Built-in mutable sequence.
-
-If no argument is given, the constructor creates a new empty list.
-The argument must be an iterable if specified.</span>
-</div><div class="tooltip">.index
-<span class="tooltiptext">Return first index of value.
-
-Raises ValueError if the value is not present.</span>
-</div>(biggest_profit_by_weight)
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">index
-<span class="tooltiptext">2 &rarr; 4 &rarr; 0 &rarr; 5 &rarr; 1 &rarr; 6 &rarr; 3</span>
-</div> = 6 &rarr; 3</div> <br>
-<div class = "div_line_num">94</div> <div class = "div_code_text">        profit_by_weight[index] = -1
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">profit_by_weight
-<span class="tooltiptext">[2.5, 1.1428571428571428, 7.0, 0.16666666666666666, 3.0, 1.5, 0.8] &rarr; [2.5, 1.1428571428571428, -1, 0.16666666666666666, 3.0, 1.5, 0.8] &rarr; [2.5, 1.1428571428571428, -1, 0.16666666666666666, -1, 1.5, 0.8] &rarr; [-1, 1.1428571428571428, -1, 0.16666666666666666, -1, 1.5, 0.8] &rarr; [-1, 1.1428571428571428, -1, 0.16666666666666666, -1, -1, 0.8] &rarr; [-1, -1, -1, 0.16666666666666666, -1, -1, 0.8] &rarr; [-1, -1, -1, 0.16666666666666666, -1, -1, -1] &rarr; [-1, -1, -1, -1, -1, -1, -1]</span>
-</div> = [-1, -1, -1, 0.16666666666666666, -1, -1, -1] &rarr; [-1, -1, -1, -1, -1, -1, -1]</div> <br>
-<div class = "div_line_num">98</div> <div class = "div_code_text">        if max_weight - limit >= weight[index]:
-</div> <br>
-<div class = "div_var_intro">True</div><br>
-<div class = "div_line_num">99</div> <div class = "div_code_text">            limit += weight[index]
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">limit
-<span class="tooltiptext">0 &rarr; 1 &rarr; 5 &rarr; 7 &rarr; 9 &rarr; 16 &rarr; 21 &rarr; 27</span>
-</div> = 21 &rarr; 27</div> <br>
-<div class = "div_line_num">102</div> <div class = "div_code_text">            gain += 1 * profit[index]
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">gain
-<span class="tooltiptext">0 &rarr; 7 &rarr; 19 &rarr; 24 &rarr; 27 &rarr; 35 &rarr; 39 &rarr; 40</span>
-</div> = 39 &rarr; 40</div> <br>
-<div class = "div_line_num">109</div> <div class = "div_code_text">        i += 1
-</div> <br>
-<div class = "div_var_mod"><div class="tooltip">i
-<span class="tooltiptext">0 &rarr; 1 &rarr; 2 &rarr; 3 &rarr; 4 &rarr; 5 &rarr; 6 &rarr; 7</span>
-</div> = 6 &rarr; 7</div> <br>
-</div class = "temp">
-<div id="ms3" class="mySlides">
-<div class = "div_line_num">82</div> <div class = "div_code_text">    while limit <= max_weight and i < length:
-</div> <br>
-</div class = "temp">
-<a class="prev" onclick="plusSlides(-1,3)">&#10094;</a>
-            <a class="next" onclick="plusSlides(1,3)">&#10095;</a>
-            </div>
-<div class = "div_line_num">110</div> <div class = "div_code_text">    return gain
+<div class = "div_line_num">49</div> <div class = "div_code_text">    return f[n]
 </div> <br>
 
 		</div>
-		<div class = " w3-green div_return_text" style = "font-size:20px">function calc_profit returned 40</div>
+		<div class = " w3-green div_return_text" style = "font-size:20px">function fibonacci returned 55</div>
 		
+55
 <script>
-var ss_count = 4;
+var ss_count = 1;
 function myFunction(id) {
   var x = document.getElementById(id);
   if (x.className.indexOf("w3-show") == -1) {
