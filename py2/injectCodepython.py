@@ -72,8 +72,8 @@ def my_tracer(frame, event, arg=None):
         print_executed_code(tracer_function_code)
 
 
-        # cfg = CFGBuilder().build_from_file("dot", "<__f__n__>")
-        # cfg.build_visual('dot', 'pdf')
+        cfg = CFGBuilder().build_from_file("dot", "<__f__n__>")
+        cfg.build_visual('dot', 'pdf')
 
         # Modify the print statement to include a styled button and an initially hidden PDF
         print('''
@@ -350,7 +350,7 @@ def my_tracer(frame, event, arg=None):
             pass
 
         # Prints the line number and code in the webpage
-        print("<div class = \"div_line_num\">%s</div>" % (str(line_no-510)), "<div class = \"div_code_text\">%s</div>" % (curr_code_html),"<br>")
+        print("<div class = \"div_line_num\">%s</div>" % (str(line_no-550)), "<div class = \"div_code_text\">%s</div>" % (curr_code_html),"<br>")
 
         # If the line of code is and if statement then the result of the evaluation of the condition is printed after it.
         if is_if:
@@ -429,7 +429,7 @@ def htmlInit():
         }
         .slideshow-container {
             position: relative;
-            background: rgba(0, 128, 0, 0.1);;
+            background: rgba(0, 128, 40, 0.2);;
             }
 
             /* Slides */

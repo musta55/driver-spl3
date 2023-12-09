@@ -72,8 +72,8 @@ def my_tracer(frame, event, arg=None):
         print_executed_code(tracer_function_code)
 
 
-        # cfg = CFGBuilder().build_from_file("dot", "Fibonacci.py")
-        # cfg.build_visual('dot', 'pdf')
+        cfg = CFGBuilder().build_from_file("dot", "merge_sort.py")
+        cfg.build_visual('dot', 'pdf')
 
         # Modify the print statement to include a styled button and an initially hidden PDF
         print('''
@@ -350,7 +350,7 @@ def my_tracer(frame, event, arg=None):
             pass
 
         # Prints the line number and code in the webpage
-        print("<div class = \"div_line_num\">%s</div>" % (str(line_no-510)), "<div class = \"div_code_text\">%s</div>" % (curr_code_html),"<br>")
+        print("<div class = \"div_line_num\">%s</div>" % (str(line_no-550)), "<div class = \"div_code_text\">%s</div>" % (curr_code_html),"<br>")
 
         # If the line of code is and if statement then the result of the evaluation of the condition is printed after it.
         if is_if:
@@ -369,7 +369,7 @@ def htmlInit():
     sys.stdout = f
 
     # Initializes the webpage along with the CSS
-    # NOTE: Fibonacci.py is replaced with the name of the file by my-second-page.js
+    # NOTE: merge_sort.py is replaced with the name of the file by my-second-page.js
     print('''
 		<!DOCTYPE html>
 		<html>
@@ -429,7 +429,7 @@ def htmlInit():
         }
         .slideshow-container {
             position: relative;
-            background: rgba(0, 128, 0, 0.1);;
+            background: rgba(0, 128, 40, 0.2);;
             }
 
             /* Slides */
@@ -540,7 +540,7 @@ def htmlInit():
 		<body>
 		<div class="w3-container">
 
-		<h2>Filename : Fibonacci.py</h2>
+		<h2>Filename : merge_sort.py</h2>
     <hr>
 		<p>Open and collapse the accordian to see the summary</p>
 	''')
@@ -552,16 +552,45 @@ htmlInit()
 settrace(my_tracer)
 
 # <__b_s__> is replaced with the code selected by the user by my-second-page.js
-def fibonacci(n):
-    f = [0, 1]
-    for i in range(2, n+1):
-        f.append(f[i-1] + f[i-2])
-    return f[n]
-# Calling the fibonacci function with n = 10
-result = fibonacci(10)
+def merge_sort(arr):
+    if len(arr) > 1:
+        mid = len(arr) // 2
+        left_half = arr[:mid]
+        right_half = arr[mid:]
 
-# Printing the result
-print(result)
+        merge_sort(left_half)
+        merge_sort(right_half)
+
+        # Merge the two sorted halves
+        i = j = k = 0
+
+        while i < len(left_half) and j < len(right_half):
+            if left_half[i] < right_half[j]:
+                arr[k] = left_half[i]
+                i += 1
+            else:
+                arr[k] = right_half[j]
+                j += 1
+            k += 1
+
+        while i < len(left_half):
+            arr[k] = left_half[i]
+            i += 1
+            k += 1
+
+        while j < len(right_half):
+            arr[k] = right_half[j]
+            j += 1
+            k += 1
+
+    return arr
+
+# Test input
+test_list = [38, 27, 43, 3, 9, 82, 10]
+
+# Perform merge sort and print the result
+sorted_list = merge_sort(test_list)
+print("Sorted list:", sorted_list)
 
 
 # Tracer function is set to None
