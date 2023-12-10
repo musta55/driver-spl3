@@ -4,7 +4,7 @@ const path = require('path');
 const { exec } = require('child_process');
 const shell = require('node-powershell');
 
-// Access token g6p5bqyqi3eqjqmkbjebr3sj2qffo6uatdmhxb6xg7bmty6zadia
+// Access token t3gldkhrhgpdtawzpujeyswyb7sxxiovdsi6knyhkiaumzd5gvka
 
 /**
  * @param {vscode.ExtensionContext} context

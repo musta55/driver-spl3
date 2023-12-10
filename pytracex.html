@@ -197,10 +197,10 @@ The source code is:
         </script>
         
 
-		<button onclick="myFunction('Demo0')" class="w3-btn w3-block w3-green w3-left-align" style = "font-size:20px"><module> Called (function) fibonacci with arguments<br>&nbsp;&nbsp;&nbsp;&nbsp;n &rarr; 9</button>
+		<button onclick="myFunction('Demo0')" class="w3-btn w3-block w3-green w3-left-align" style = "font-size:20px"><module> Called (function) fibonacci with arguments<br>&nbsp;&nbsp;&nbsp;&nbsp;n &rarr; 10</button>
     	<div id="Demo0" class="w3-container w3-hide div_func_button">
 		
-<div class = "div_var_intro">n = 9 is introduced.</div> <br>
+<div class = "div_var_intro">n = 10 is introduced.</div> <br>
 <div class = "div_line_num">46</div> <div class = "div_code_text">    f = [0, 1]
 </div> <br>
 <div class = "div_var_intro">f = [0, 1] is introduced.</div> <br>
@@ -439,6 +439,34 @@ These are exactly the valid indices for a list of 4 elements.
 When step is given, it specifies the increment (or decrement).</span>
 </div>(2, n+1):
 </div> <br>
+<div class = "div_var_mod"><div class="tooltip">i
+<span class="tooltiptext">2 &rarr; 3 &rarr; 4 &rarr; 5 &rarr; 6 &rarr; 7 &rarr; 8 &rarr; 9 &rarr; 10</span>
+</div> = 9 &rarr; 10</div> <br>
+<div class = "div_line_num">48</div> <div class = "div_code_text">        <div class="tooltip">f
+<span class="tooltiptext">Built-in mutable sequence.
+
+If no argument is given, the constructor creates a new empty list.
+The argument must be an iterable if specified.</span>
+</div><div class="tooltip">.append
+<span class="tooltiptext">Append object to the end of the list.</span>
+</div>(f[i-1] + f[i-2])
+</div> <br>
+<div class = "div_var_mod"><div class="tooltip">f
+<span class="tooltiptext">[0, 1] &rarr; [0, 1, 1] &rarr; [0, 1, 1, 2] &rarr; [0, 1, 1, 2, 3] &rarr; [0, 1, 1, 2, 3, 5] &rarr; [0, 1, 1, 2, 3, 5, 8] &rarr; [0, 1, 1, 2, 3, 5, 8, 13] &rarr; [0, 1, 1, 2, 3, 5, 8, 13, 21] &rarr; [0, 1, 1, 2, 3, 5, 8, 13, 21, 34] &rarr; [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55]</span>
+</div> = [0, 1, 1, 2, 3, 5, 8, 13, 21, 34] &rarr; [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55]</div> <br>
+</div class = "temp">
+<div id="ms0" class="mySlides">
+<div class = "div_line_num">47</div> <div class = "div_code_text">    for i in <div class="tooltip">range
+<span class="tooltiptext">range(stop) -> range object
+range(start, stop[, step]) -> range object
+
+Return an object that produces a sequence of integers from start (inclusive)
+to stop (exclusive) by step.  range(i, j) produces i, i+1, i+2, ..., j-1.
+start defaults to 0, and stop is omitted!  range(4) produces 0, 1, 2, 3.
+These are exactly the valid indices for a list of 4 elements.
+When step is given, it specifies the increment (or decrement).</span>
+</div>(2, n+1):
+</div> <br>
 </div class = "temp">
 <a class="prev" onclick="plusSlides(-1,0)">&#10094;</a>
             <a class="next" onclick="plusSlides(1,0)">&#10095;</a>
@@ -447,9 +475,9 @@ When step is given, it specifies the increment (or decrement).</span>
 </div> <br>
 
 		</div>
-		<div class = " w3-green div_return_text" style = "font-size:20px">function fibonacci returned 34</div>
+		<div class = " w3-green div_return_text" style = "font-size:20px">function fibonacci returned 55</div>
 		
-34
+55
 <script>
 var ss_count = 1;
 function myFunction(id) {

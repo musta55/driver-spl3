@@ -2,6 +2,7 @@
   "name": "py2",
   "displayName": "py2",
   "description": "",
+  "publisher": "MustahidHasan",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.84.0"

@@ -72,7 +72,7 @@ def my_tracer(frame, event, arg=None):
         print_executed_code(tracer_function_code)
 
 
-        cfg = CFGBuilder().build_from_file("dot", "merge_sort.py")
+        cfg = CFGBuilder().build_from_file("dot", "lcs2.py")
         cfg.build_visual('dot', 'pdf')
 
         # Modify the print statement to include a styled button and an initially hidden PDF
@@ -369,7 +369,7 @@ def htmlInit():
     sys.stdout = f
 
     # Initializes the webpage along with the CSS
-    # NOTE: merge_sort.py is replaced with the name of the file by my-second-page.js
+    # NOTE: lcs2.py is replaced with the name of the file by my-second-page.js
     print('''
 		<!DOCTYPE html>
 		<html>
@@ -540,7 +540,7 @@ def htmlInit():
 		<body>
 		<div class="w3-container">
 
-		<h2>Filename : merge_sort.py</h2>
+		<h2>Filename : lcs2.py</h2>
     <hr>
 		<p>Open and collapse the accordian to see the summary</p>
 	''')
@@ -552,45 +552,52 @@ htmlInit()
 settrace(my_tracer)
 
 # <__b_s__> is replaced with the code selected by the user by my-second-page.js
-def merge_sort(arr):
-    if len(arr) > 1:
-        mid = len(arr) // 2
-        left_half = arr[:mid]
-        right_half = arr[mid:]
+def longest_common_subsequence(x: str, y: str):
 
-        merge_sort(left_half)
-        merge_sort(right_half)
+    m = len(x)
+    n = len(y)
 
-        # Merge the two sorted halves
-        i = j = k = 0
+    dp = [[0] * (n + 1) for _ in range(m + 1)]
 
-        while i < len(left_half) and j < len(right_half):
-            if left_half[i] < right_half[j]:
-                arr[k] = left_half[i]
-                i += 1
+    # Fill in the dynamic programming table
+    for i in range(1, m + 1):
+        for j in range(1, n + 1):
+            if x[i - 1] == y[j - 1]:
+                match = 1
             else:
-                arr[k] = right_half[j]
-                j += 1
-            k += 1
+                match = 0
 
-        while i < len(left_half):
-            arr[k] = left_half[i]
-            i += 1
-            k += 1
+            dp[i][j] = max(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1] + match)
 
-        while j < len(right_half):
-            arr[k] = right_half[j]
-            j += 1
-            k += 1
+    seq = ""
+    i, j = m, n
+    while i > 0 and j > 0:
+        if x[i - 1] == y[j - 1]:
+            match = 1
+        else:
+            match = 0
 
-    return arr
+        if dp[i][j] == dp[i - 1][j - 1] + match:
+            if match == 1:
+                seq = x[i - 1] + seq
+            i -= 1
+            j -= 1
+        elif dp[i][j] == dp[i - 1][j]:
+            i -= 1
+        else:
+            j -= 1
 
-# Test input
-test_list = [38, 27, 43, 3, 9, 82, 10]
+    return dp[m][n], seq
 
-# Perform merge sort and print the result
-sorted_list = merge_sort(test_list)
-print("Sorted list:", sorted_list)
+if __name__ == "__main__":
+    string1 = "AGGTABC"
+    string2 = "GXTXAYBWC"
+    expected_length = 5
+    expected_subseq = "GTABC"
+
+    length, subsequence = longest_common_subsequence(string1, string2)
+    print("Length of LCS:", length)
+    print("Longest Common Subsequence:", subsequence)
 
 
 # Tracer function is set to None

@@ -4,28 +4,22 @@ This is the README for your extension "py2". After writing up a brief descriptio
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+1. Welcome to the PyTraceX: a python program comprehension tool.
+Run the extension.
+2. Visualize the call graph via static analysis
+3. Simulate the code into step-by-step manner.
+4. Trace dynamically of the internal variables and functions in the top down approach.
+5. Summarize the code in an algorithmic way with proper execution example.
+6. Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
 
-For example if there is an image subfolder under your extension project workspace:
-
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
 
 ## Requirements
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
-
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+1. Run the extension
+2. Open the editor and open a python file that you want to comprehend.
+3. ctrl+shift+p  to open the command pallete and search for "Comprehension" extension.
+4. Run the tool and grab a cup of coffee!
+ 
 
 ## Known Issues
 

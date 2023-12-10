@@ -557,9 +557,11 @@ def fibonacci(n):
     for i in range(2, n+1):
         f.append(f[i-1] + f[i-2])
     return f[n]
+# Calling the fibonacci function with n = 10
+result = fibonacci(10)
 
-res = fibonacci(9)
-print(res)
+# Printing the result
+print(result)
 
 
 # Tracer function is set to None
