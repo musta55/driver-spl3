@@ -77,8 +77,8 @@ def my_tracer(frame, event, arg=None):
 
         # Modify the print statement to include a styled button and an initially hidden PDF
         print('''
-        <button onclick="showPDF()" style="margin: 10px; padding: 10px; background-color: #4caf50; color: white; border: none; cursor: pointer;">Static Analysis</button>
-        <embed id="pdf" src="dot.pdf" type="application/pdf" style="display: none; width: 100%; height: 800px;">
+        <button onclick="showPDF()" style="margin: 20px; padding: 10px; background-color: #4caf50; color: white; border: none; cursor: pointer;">Static Analysis</button>
+        <embed id="pdf" src="dot.pdf" type="application/pdf" style="display: none; margin: 20px; padding: 10px width: 100%; height: 800px;">
         ''')
 
         # Add JavaScript function to show/hide the PDF
@@ -350,7 +350,7 @@ def my_tracer(frame, event, arg=None):
             pass
 
         # Prints the line number and code in the webpage
-        print("<div class = \"div_line_num\">%s</div>" % (str(line_no-510)), "<div class = \"div_code_text\">%s</div>" % (curr_code_html),"<br>")
+        print("<div class = \"div_line_num\">%s</div>" % (str(line_no-550)), "<div class = \"div_code_text\">%s</div>" % (curr_code_html),"<br>")
 
         # If the line of code is and if statement then the result of the evaluation of the condition is printed after it.
         if is_if:
@@ -539,6 +539,7 @@ def htmlInit():
         </style>
 		<body>
 		<div class="w3-container">
+        <h2 style="text-align: center; color: rgba(0, 128, 0, 0.8); font-weight: bold; font-size: 48px; font-style: italic;">PyCompreX</h2>
 
 		<h2>Filename : <__f__n__></h2>
     <hr>
